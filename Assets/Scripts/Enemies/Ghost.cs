@@ -42,5 +42,8 @@ public class Ghost : Enemy
             //deal damage to the player
             gameObject.SetActive(false);
         }
+        //if it is a magic projectile add _magicPoints to points count and disable GO
+        
+        //if it is a shoot projectile, add _shootPoints to points count and disable GO
     }
 }

@@ -48,4 +48,17 @@ public class Enemy : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * _moveSpeed);
         Debug.Log("Moving To Player");
     }
+
+    protected void CheckLives()
+    {
+        if (_hitPoints <= 0)
+        {
+            Disable();
+        }
+    }
+
+    public void Disable()
+    {
+        gameObject.SetActive(false);
+    }
 }
