@@ -16,19 +16,19 @@ public class Grunt : Enemy
             case 1:
                 {
                     _damage = 5;
-                    _hitPoints = 1;
+                    hitPoints = 1;
                     break;
                 }
             case 2:
                 {
                     _damage = 8;
-                    _hitPoints = 2;
+                    hitPoints = 2;
                     break;
                 }
             case 3:
                 {
                     _damage = 10;
-                    _hitPoints = 3;
+                    hitPoints = 3;
                     break;
                 }
         }

@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Demon : Enemy
 {
-    private int _shootDamage;
-    private float _shootCD; //shooting cooldown
-    private bool _canShoot; //is CD over
+    public float _shootCD; //shooting cooldown
+    public bool _canShoot = true; //is CD over
 
     public Transform spawnPoint;
 
@@ -17,26 +16,24 @@ public class Demon : Enemy
         _fightPoints = 25;
         _generatorPoints = 10;
 
-        _shootDamage = 10;
-
         switch (rank)
         {
             case 1:
                 {
                     _damage = 5;
-                    _hitPoints = 1;
+                    hitPoints = 1;
                     break;
                 }
             case 2:
                 {
                     _damage = 8;
-                    _hitPoints = 2;
+                    hitPoints = 2;
                     break;
                 }
             case 3:
                 {
                     _damage = 10;
-                    _hitPoints = 3;
+                    hitPoints = 3;
                     break;
                 }
         }
@@ -44,6 +41,15 @@ public class Demon : Enemy
         isMagicDamagable = true;
         isShootDamagable = true;
         isFightDamagable = true;
+
+    }
+
+    private void Update()
+    {
+        if (_canShoot)
+        {
+            StartCoroutine(ShootPlayer());
+        }
     }
 
     private void TrackPlayer()
@@ -56,10 +62,8 @@ public class Demon : Enemy
                 if (hitCollider.tag == "Player")
                 {
                     //shoot the player
-                    while (isActiveAndEnabled)
-                    {
-                        StartCoroutine(ShootPlayer());
-                    }
+                    StartCoroutine(ShootPlayer());
+                    Debug.Log("Initialized shooting");
                     Debug.Log("Player In Collider");
                 }
             }
@@ -87,5 +91,8 @@ public class Demon : Enemy
         yield return new WaitForSeconds(_shootCD);
 
         _canShoot = true;
+        Debug.Log("ShotCD reset");
     }
+
+
 }

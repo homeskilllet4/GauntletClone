@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     protected int _generatorPoints; //points awarded for destroying generator
 
     protected int _damage; //damage done to player
-    protected int _hitPoints; //amount of life
+    public int hitPoints; //amount of life
 
     public bool isMagicDamagable; //is damagable by magic
     public bool isShootDamagable; //is damagable by shooting
@@ -21,8 +21,9 @@ public class Enemy : MonoBehaviour
     private float _moveSpeed = .05f; //base speed
     public int speed = 1; //speed multiplier
 
-    public bool _isOnBlockade = false; //is blockade between the player and enemy
-    public bool _isTouchingBlockade; //is it touching blockade?
+    private bool _isOnBlockade = false; //is blockade between the player and enemy
+    private bool _isTouchingBlockade; //is it touching blockade?
+    private bool _isPlayerInCollider; //is the player in the collider?
     //public bool _isMoving; //is this enemy moving
     private RaycastHit hit;
 
@@ -38,6 +39,7 @@ public class Enemy : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, 10);
         if (hitColliders.Length > 0)
         {
+            _isPlayerInCollider = true;
             foreach (Collider hitCollider in hitColliders)
             {
                 if (hitCollider.tag == "Player")
@@ -77,9 +79,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected void CheckLives()
+    public void CheckLives()
     {
-        if (_hitPoints <= 0)
+        if (hitPoints <= 0)
         {
             Disable();
         }
