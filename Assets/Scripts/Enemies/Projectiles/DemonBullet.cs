@@ -11,9 +11,10 @@ public class DemonBullet : MonoBehaviour
     public float speed = 2.0f;
     private float _damage;
 
+    float minDistance;
+
     private void OnEnable()
     {
-
         TrackPlayer();
         StartCoroutine(DisableThyself());
 
@@ -21,23 +22,17 @@ public class DemonBullet : MonoBehaviour
         transform.LookAt(playerPos);
 
         _damage = 10;
-    }
 
-    private void FixedUpdate()
-    {
-
+        minDistance = float.MaxValue;
     }
 
     private void Update()
     {
         transform.position += transform.forward * speed * Time.deltaTime;
 
-        float minDistance = float.MaxValue;
-
         for (int i = 0; i < players.Length; i++)
         {
             float thisDistance = Vector3.Distance(transform.position, players[i].transform.position);
-            //float thisDistance = Mathf.Abs(players[i].transform.position.y - transform.position.y);
 
             distance[i] = thisDistance;
 
@@ -52,10 +47,9 @@ public class DemonBullet : MonoBehaviour
 
     private void TrackPlayer()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, 500);
+        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, 30);
         if (hitColliders.Length > 0)
         {
-            //int i = 0;
             foreach (Collider hitCollider in hitColliders)
             {
                 if (hitCollider.tag == "Player")
@@ -68,13 +62,6 @@ public class DemonBullet : MonoBehaviour
                         players[2] = hitCollider.gameObject;
                     else if (players[3] == null)
                         players[3] = hitCollider.gameObject;
-                        
-
-                    //Debug.Log(hitCollider);
-                    //if (i < 3)
-                        //i++;
-                    //else if (i == 3)
-                        //i = 0;
                 }
             }
         }
@@ -94,7 +81,7 @@ public class DemonBullet : MonoBehaviour
             gameObject.SetActive(false);
             //deal damage to the player
         }
-        if (other.CompareTag("Blockade"))
+        if (other.CompareTag("Blockade") || other.CompareTag("Generator"))
         {
             gameObject.SetActive(false);
         }

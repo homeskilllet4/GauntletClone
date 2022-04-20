@@ -7,6 +7,9 @@ TagManager:
   - Blockade
   - DemonProjectile
   - Demon
+  - Grunt
+  - Ghost
+  - Generator
   layers:
   - Default
   - TransparentFX

@@ -52,25 +52,34 @@ public class Demon : Enemy
         {
             StartCoroutine(ShootPlayer());
         }
+
+        CheckPlayerPos();
+        transform.LookAt(players[closestPlayer].transform);
+
+
     }
 
-    private void TrackPlayer()
+    /*private void TrackPlayer()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, 30);
+        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, 500);
         if (hitColliders.Length > 0)
         {
             foreach (Collider hitCollider in hitColliders)
             {
                 if (hitCollider.tag == "Player")
                 {
-                    //shoot the player
-                    StartCoroutine(ShootPlayer());
-                    Debug.Log("Initialized shooting");
-                    Debug.Log("Player In Collider");
+                    if (players[0] == null)
+                        players[0] = hitCollider.gameObject;
+                    else if (players[1] == null)
+                        players[1] = hitCollider.gameObject;
+                    else if (players[2] == null)
+                        players[2] = hitCollider.gameObject;
+                    else if (players[3] == null)
+                        players[3] = hitCollider.gameObject;
                 }
             }
         }
-    }
+    }*/
 
     private IEnumerator ShootPlayer()
     {
