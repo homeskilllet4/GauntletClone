@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Demon : Enemy
 {
+    public Transform player;
+
     public float _shootCD; //shooting cooldown
     public bool _canShoot = true; //is CD over
 
@@ -42,6 +44,7 @@ public class Demon : Enemy
         isShootDamagable = true;
         isFightDamagable = true;
 
+        CheckLives();
     }
 
     private void Update()
@@ -50,24 +53,11 @@ public class Demon : Enemy
         {
             StartCoroutine(ShootPlayer());
         }
-    }
 
-    private void TrackPlayer()
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, 10);
-        if (hitColliders.Length > 0)
-        {
-            foreach (Collider hitCollider in hitColliders)
-            {
-                if (hitCollider.tag == "Player")
-                {
-                    //shoot the player
-                    StartCoroutine(ShootPlayer());
-                    Debug.Log("Initialized shooting");
-                    Debug.Log("Player In Collider");
-                }
-            }
-        }
+        CheckPlayerPos();
+        transform.LookAt(players[closestPlayer].transform);
+
+
     }
 
     private IEnumerator ShootPlayer()
@@ -92,6 +82,15 @@ public class Demon : Enemy
 
         _canShoot = true;
         Debug.Log("ShotCD reset");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //if it is a magic projectile add _magicPoints to points count and takes away one health then checks if all lives are gone
+
+        //if player is hit with fight, add _fightPoints to ponits count and takes away one health then checks if all lives are gone
+
+        //if it is a shoot projectile, add _shootPoints to points count and takes away one health then checks if all lives are gone
     }
 
 

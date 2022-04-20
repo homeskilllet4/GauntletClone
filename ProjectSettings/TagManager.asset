@@ -7,6 +7,10 @@ TagManager:
   - Blockade
   - DemonProjectile
   - Demon
+  - Grunt
+  - Ghost
+  - Generator
+  - PlayerProjectile
   layers:
   - Default
   - TransparentFX

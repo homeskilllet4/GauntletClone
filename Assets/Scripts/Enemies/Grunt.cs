@@ -36,6 +36,8 @@ public class Grunt : Enemy
         isMagicDamagable = true;
         isShootDamagable = true;
         isFightDamagable = true;
+
+        CheckLives();
     }
 
     private void OnTriggerEnter(Collider other)

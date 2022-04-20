@@ -27,16 +27,46 @@ public class Enemy : MonoBehaviour
     //public bool _isMoving; //is this enemy moving
     private RaycastHit hit;
 
+    public GameObject[] players = new GameObject[4];
+    public float[] distance = new float[4];
+    public int closestPlayer = 0;
+
+    public Material life1, life2, life3;
+
     void FixedUpdate()
     {
         //check where the player is and follow them
         CheckPlayerPos();
         Debug.Log("Checking Player Pos");
+
+        float minDistance = float.MaxValue;
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i] != null)
+            {
+                float thisDistance = Vector3.Distance(transform.position, players[i].transform.position);
+
+                distance[i] = thisDistance;
+
+                if (thisDistance < minDistance)
+                {
+                    minDistance = thisDistance;
+                    closestPlayer = i;
+                    Debug.Log(closestPlayer);
+                }
+            }
+        }
+
+        Vector3 playerPos = new Vector3(players[closestPlayer].transform.position.x, players[closestPlayer].transform.position.y, players[closestPlayer].transform.position.z);
+        transform.LookAt(playerPos);
+
+        FollowPlayer(players[closestPlayer]);
     }
 
     protected void CheckPlayerPos()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, 10);
+        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, 20);
         if (hitColliders.Length > 0)
         {
             _isPlayerInCollider = true;
@@ -44,8 +74,16 @@ public class Enemy : MonoBehaviour
             {
                 if (hitCollider.tag == "Player")
                 {
+                    if (players[0] == null)
+                        players[0] = hitCollider.gameObject;
+                    else if (players[1] == null)
+                        players[1] = hitCollider.gameObject;
+                    else if (players[2] == null)
+                        players[2] = hitCollider.gameObject;
+                    else if (players[3] == null)
+                        players[3] = hitCollider.gameObject;
+
                     //follow the player
-                    FollowPlayer(hitCollider.gameObject);
                     Debug.Log("Player In Collider");
                 }
             }
@@ -81,9 +119,22 @@ public class Enemy : MonoBehaviour
 
     public void CheckLives()
     {
+        Renderer mat = GetComponent<Renderer>();
+
         if (hitPoints <= 0)
-        {
             Disable();
+
+        switch (hitPoints)
+        {
+            case 1:
+                mat.material = life1;
+                break;
+            case 2:
+                mat.material = life2;
+                break;
+            case 3:
+                mat.material = life3;
+                break;
         }
     }
 

@@ -16,16 +16,19 @@ public class Ghost : Enemy
             case 1:
                 {
                     _damage = 10;
+                    hitPoints = 1;
                     break;
                 }
             case 2:
                 {
                     _damage = 20;
+                    hitPoints = 2;
                     break;
                 }
             case 3:
                 {
                     _damage = 30;
+                    hitPoints = 3;
                     break;
                 }
         }
@@ -33,6 +36,8 @@ public class Ghost : Enemy
         isMagicDamagable = true;
         isShootDamagable = true;
         isFightDamagable = false;
+
+        CheckLives();
     }
 
     private void OnTriggerEnter(Collider other)
