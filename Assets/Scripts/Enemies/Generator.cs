@@ -5,12 +5,15 @@ using UnityEngine;
 public class Generator : MonoBehaviour
 {
     public int rank; //what rank of enemies
+    public Mesh rank1, rank2, rank3; //model for first second and third prefabs
+    public Material life1, life2, life3;
     
     public float spawnCD = 2.0f; //how often can enemies spawn
     private Vector3 _spawnLoc; //where will the enemy spawn
     public string enemyType; //what type of enemy (tag)
 
     private int _hitPoints;
+    private int _points = 10;
 
     private Material _ogMat;
     public Material redMat; //mat to change color to when hit
@@ -20,6 +23,25 @@ public class Generator : MonoBehaviour
         _hitPoints = rank;
         _spawnLoc = new Vector3(transform.position.x + 2, transform.position.y, transform.position.z);
         StartCoroutine(Spawn());
+        CheckLives();
+
+        MeshFilter meshF = GetComponent<MeshFilter>();
+        MeshCollider meshC = GetComponent<MeshCollider>();
+        switch (rank)
+        {
+            case 1:
+                meshF.mesh = rank1;
+                meshC.sharedMesh = rank1;
+                break;
+            case 2:
+                meshF.mesh = rank2;
+                meshC.sharedMesh = rank2;
+                break;
+            case 3:
+                meshF.mesh = rank3;
+                meshC.sharedMesh = rank3;
+                break;
+        }
     }
 
     private IEnumerator Spawn()
@@ -47,13 +69,28 @@ public class Generator : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
-        GetComponent<Renderer>().material = _ogMat;
+        CheckLives();
     }
 
     private void CheckLives()
     {
+        Renderer mat = GetComponent<Renderer>();
+
         if (_hitPoints <= 0)
             gameObject.SetActive(false);
+
+        switch (_hitPoints)
+        {
+            case 1:
+                mat.material = life1;
+                break;
+            case 2:
+                mat.material = life2;
+                break;
+            case 3:
+                mat.material = life3;
+                break;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -62,7 +99,8 @@ public class Generator : MonoBehaviour
         {
             StartCoroutine(GetHit());
             _hitPoints--;
-            CheckLives();
+            //CheckLives();
+            //add points for killing generator
         }
     }
 }

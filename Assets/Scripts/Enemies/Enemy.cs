@@ -31,6 +31,8 @@ public class Enemy : MonoBehaviour
     public float[] distance = new float[4];
     public int closestPlayer = 0;
 
+    public Material life1, life2, life3;
+
     void FixedUpdate()
     {
         //check where the player is and follow them
@@ -117,9 +119,22 @@ public class Enemy : MonoBehaviour
 
     public void CheckLives()
     {
+        Renderer mat = GetComponent<Renderer>();
+
         if (hitPoints <= 0)
-        {
             Disable();
+
+        switch (hitPoints)
+        {
+            case 1:
+                mat.material = life1;
+                break;
+            case 2:
+                mat.material = life2;
+                break;
+            case 3:
+                mat.material = life3;
+                break;
         }
     }
 

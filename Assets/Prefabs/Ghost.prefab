@@ -156,3 +156,6 @@ MonoBehaviour:
   - 0
   - 0
   closestPlayer: 0
+  life1: {fileID: 2100000, guid: e407b425b5e9af2458ceb6b82685b499, type: 2}
+  life2: {fileID: 2100000, guid: 918ff8d9029f1cc4896ae7b7457bdae9, type: 2}
+  life3: {fileID: 2100000, guid: cd18d6ec16d81a74b88d5c198eb38e6e, type: 2}

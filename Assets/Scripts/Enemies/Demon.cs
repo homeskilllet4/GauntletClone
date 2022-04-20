@@ -44,6 +44,7 @@ public class Demon : Enemy
         isShootDamagable = true;
         isFightDamagable = true;
 
+        CheckLives();
     }
 
     private void Update()
@@ -58,28 +59,6 @@ public class Demon : Enemy
 
 
     }
-
-    /*private void TrackPlayer()
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, 500);
-        if (hitColliders.Length > 0)
-        {
-            foreach (Collider hitCollider in hitColliders)
-            {
-                if (hitCollider.tag == "Player")
-                {
-                    if (players[0] == null)
-                        players[0] = hitCollider.gameObject;
-                    else if (players[1] == null)
-                        players[1] = hitCollider.gameObject;
-                    else if (players[2] == null)
-                        players[2] = hitCollider.gameObject;
-                    else if (players[3] == null)
-                        players[3] = hitCollider.gameObject;
-                }
-            }
-        }
-    }*/
 
     private IEnumerator ShootPlayer()
     {
@@ -103,6 +82,15 @@ public class Demon : Enemy
 
         _canShoot = true;
         Debug.Log("ShotCD reset");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //if it is a magic projectile add _magicPoints to points count and takes away one health then checks if all lives are gone
+
+        //if player is hit with fight, add _fightPoints to ponits count and takes away one health then checks if all lives are gone
+
+        //if it is a shoot projectile, add _shootPoints to points count and takes away one health then checks if all lives are gone
     }
 
 
