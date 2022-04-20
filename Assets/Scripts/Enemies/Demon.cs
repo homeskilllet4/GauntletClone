@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Demon : Enemy
 {
+    public Transform player;
+
     public float _shootCD; //shooting cooldown
     public bool _canShoot = true; //is CD over
 
@@ -54,7 +56,7 @@ public class Demon : Enemy
 
     private void TrackPlayer()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, 10);
+        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, 30);
         if (hitColliders.Length > 0)
         {
             foreach (Collider hitCollider in hitColliders)
