@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8752095505967712180}
   - component: {fileID: 5840548166655298158}
   m_Layer: 0
-  m_Name: Rank2Generator
+  m_Name: Rank2GhostGenerator
   m_TagString: Generator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
