@@ -15,11 +15,13 @@ public class Sorcerer : Enemy
 
     private void OnEnable()
     {
+        //set point values
         _magicPoints = 10;
         _shootingPoints = 5;
         _fightPoints = 25;
         _generatorPoints = 10;
 
+        //set damage and health values based on rank
         switch (rank)
         {
             case 1:
@@ -42,36 +44,46 @@ public class Sorcerer : Enemy
                 }
         }
 
+        //set what the enemy can be damaged by
         isMagicDamagable = true;
         isShootDamagable = true;
         isFightDamagable = true;
 
+        //set color based on rank
         CheckLives();
 
+        //start the invisibility loop
         StartCoroutine(GoInvis());
     }
 
+    //turn this enemy invisible for the invis time, turns off invis, then loops
     IEnumerator GoInvis()
     {
         Renderer mR = GetComponent<Renderer>();
         Material ogMaterial;
 
+        //always loop
         while (true)
         {
+            //save the starting material, switch material to invisible material
             ogMaterial = mR.material;
             _isInvisible = true;
             mR.material = invisMat;
 
+            //wait for the amount of time they are supposed to be invisible
             yield return new WaitForSeconds(invisTime);
 
+            //turn off invisibility and switch back to original material
             Debug.Log("Go out of invis");
             _isInvisible = false;
             mR.material = ogMaterial;
 
+            //wait until the cooldown is done then start invis again
             yield return new WaitForSeconds(invisCD);
         }
     }
 
+    //if this enemy is touching the player and not invisible, do damage in specific intervals.
     IEnumerator FightPlayer()
     {
         while (_isTouchingPlayer)
@@ -87,6 +99,7 @@ public class Sorcerer : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
+        //if this enemy is touching the player, set bool to true then activate fight damage
         if (other.CompareTag("Player"))
         {
             _isTouchingPlayer = true;
@@ -96,9 +109,11 @@ public class Sorcerer : Enemy
 
     private void OnTriggerExit(Collider other)
     {
+        //if the player leaves the trigger zone, stop the coroutine for fighting player
         if (other.CompareTag("Player"))
         {
             _isTouchingPlayer = false;
+            StopCoroutine(FightPlayer());
         }
     }
 
