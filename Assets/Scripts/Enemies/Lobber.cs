@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Demon : Enemy
+public class Lobber : Enemy
 {
     public float _shootCD; //shooting cooldown
     public bool _canShoot = true; //is CD over
-
     public Transform spawnPoint; //where the bullet spawns
 
     private void OnEnable()
@@ -22,26 +21,26 @@ public class Demon : Enemy
         {
             case 1:
                 {
-                    _damage = 5;
+                    _damage = 3;
                     hitPoints = 1;
                     break;
                 }
             case 2:
                 {
-                    _damage = 8;
+                    _damage = 3;
                     hitPoints = 2;
                     break;
                 }
             case 3:
                 {
-                    _damage = 10;
+                    _damage = 3;
                     hitPoints = 3;
                     break;
                 }
         }
 
         //set what the enemy can be damaged by
-        isMagicDamagable = true;
+        isMagicDamagable = false;
         isShootDamagable = true;
         isFightDamagable = true;
 
@@ -54,10 +53,6 @@ public class Demon : Enemy
         //shoots, then has a CD til it can shoot again.
         if (_canShoot)
             StartCoroutine(ShootPlayer());
-
-        //these lines are being called in parent enemy script, keeping for now in case it screws something up
-        //CheckPlayerPos();
-        //transform.LookAt(players[closestPlayer].transform);
     }
 
     private IEnumerator ShootPlayer()
@@ -65,7 +60,7 @@ public class Demon : Enemy
         //set bullet spawn location and rotation
         Vector3 spawnPosition = spawnPoint.position; ;
         Quaternion spawnRotation = Quaternion.Euler(0, 0, 0);
-        
+
         //if the enemy can shoot, grab the object from the object pool and enable it, then disable shooting.
         if (_canShoot)
         {
@@ -87,15 +82,4 @@ public class Demon : Enemy
         _canShoot = true;
         Debug.Log("ShotCD reset");
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //if it is a magic projectile add _magicPoints to points count and takes away one health then checks if all lives are gone
-
-        //if player is hit with fight, add _fightPoints to ponits count and takes away one health then checks if all lives are gone
-
-        //if it is a shoot projectile, add _shootPoints to points count and takes away one health then checks if all lives are gone
-    }
-
-
 }

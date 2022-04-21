@@ -6,11 +6,13 @@ public class Grunt : Enemy
 {
     private void OnEnable()
     {
+        //set point values
         _magicPoints = 10;
         _shootingPoints = 5;
         _fightPoints = 25;
         _generatorPoints = 10;
 
+        //set damage and health values based on rank
         switch (rank)
         {
             case 1:
@@ -33,20 +35,24 @@ public class Grunt : Enemy
                 }
         }
 
+        //set what the enemy can be damaged by
         isMagicDamagable = true;
         isShootDamagable = true;
         isFightDamagable = true;
 
+        //set color based on rank
         CheckLives();
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        //if trigger is player, deal damage to them
         if (other.CompareTag("Player"))
         {
             //deal damage to the player
         }
 
+        //if trigger is player projectile, take a life from this enemy and change color by new health value.
         if (other.CompareTag("PlayerProjectile"))
         {
             hitPoints--;

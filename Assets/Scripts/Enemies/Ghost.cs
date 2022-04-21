@@ -6,11 +6,13 @@ public class Ghost : Enemy
 {
     private void OnEnable()
     {
+        //set point values
         _magicPoints = 10;
         _shootingPoints = 10;
         _fightPoints = 0;
         _generatorPoints = 10;
 
+        //set damage and health values based on rank
         switch (rank)
         {
             case 1:
@@ -33,15 +35,18 @@ public class Ghost : Enemy
                 }
         }
 
+        //set what the enemy can be damaged by
         isMagicDamagable = true;
         isShootDamagable = true;
         isFightDamagable = false;
 
+        //set color based on rank
         CheckLives();
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        //if trigger is player, deal damage to them and then disable this enemy GO
         if (other.CompareTag("Player"))
         {
             //deal damage to the player
