@@ -11,6 +11,8 @@ TagManager:
   - Ghost
   - Generator
   - PlayerProjectile
+  - Sorcerer
+  - Thief
   layers:
   - Default
   - TransparentFX

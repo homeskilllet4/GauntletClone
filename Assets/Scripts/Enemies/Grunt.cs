@@ -47,6 +47,12 @@ public class Grunt : Enemy
             //deal damage to the player
         }
 
+        if (other.CompareTag("PlayerProjectile"))
+        {
+            hitPoints--;
+            CheckLives();
+        }
+
         //if it is a magic projectile add _magicPoints to points count and takes away one health then checks if all lives are gone
 
         //if player is hit with fight, add _fightPoints to ponits count and takes away one health then checks if all lives are gone
