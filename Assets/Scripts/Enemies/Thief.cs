@@ -46,4 +46,17 @@ public class Thief : Enemy
         //set material based on rank
         CheckLives();
     }
+
+    //steal the players item
+    public void StealItem()
+    {
+        //steal the player's item
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //if this enemy hits the player, steal their item
+        if (other.CompareTag("Player"))
+            StealItem();
+    }
 }

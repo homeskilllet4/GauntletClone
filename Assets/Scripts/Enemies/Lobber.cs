@@ -64,12 +64,12 @@ public class Lobber : Enemy
         //if the enemy can shoot, grab the object from the object pool and enable it, then disable shooting.
         if (_canShoot)
         {
-            GameObject demonProjectile = ObjectPooler.Instance.GetPooledObject("DemonProjectile");
-            if (demonProjectile != null)
+            GameObject lobberProjectile = ObjectPooler.Instance.GetPooledObject("LobberProjectile");
+            if (lobberProjectile != null)
             {
-                demonProjectile.transform.position = spawnPosition;
-                demonProjectile.transform.rotation = spawnRotation;
-                demonProjectile.SetActive(true);
+                lobberProjectile.transform.position = spawnPosition;
+                lobberProjectile.transform.rotation = spawnRotation;
+                lobberProjectile.SetActive(true);
                 _canShoot = false;
                 Debug.Log("Spawned Projectile");
             }
@@ -81,5 +81,14 @@ public class Lobber : Enemy
         //reenable shooting
         _canShoot = true;
         Debug.Log("ShotCD reset");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //if it is a magic projectile add _magicPoints to points count and takes away one health then checks if all lives are gone
+
+        //if player is hit with fight, add _fightPoints to ponits count and takes away one health then checks if all lives are gone
+
+        //if it is a shoot projectile, add _shootPoints to points count and takes away one health then checks if all lives are gone
     }
 }
