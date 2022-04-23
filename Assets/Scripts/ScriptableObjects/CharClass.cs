@@ -4,6 +4,7 @@ using UnityEngine;
 public class CharClass : ScriptableObject
 {
     public string className;
+    public Material playerMat;
     [Range(1, 3), Tooltip("Ranged Power: 1=weak, 2=moderate, 3=strong")]
     public int magicPower;
     [Range(1, 3), Tooltip("Melee Power: 1=Weak, 2=moderate, 3=strong")]

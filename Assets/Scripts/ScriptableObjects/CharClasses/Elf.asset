@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Elf
   m_EditorClassIdentifier: 
   className: Elf
+  playerMat: {fileID: 2100000, guid: d35045c204760b047bc1238f8bb1f967, type: 2}
   magicPower: 1
   fightPower: 2
   movementSpeed: 3

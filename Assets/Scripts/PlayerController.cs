@@ -1,25 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+
+
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    private PlayerInput playerInputActions;
-    public Vector3 speed;
-    public Vector2 movementDirection;
+    [SerializeField]
+    private float playerSpeed = 2.0f;
+    [SerializeField]
+    private float gravityValue = -9.8f;
+
+    private CharacterController controller;
+    private PlayerInput playerInput;
+
+    private Vector3 playerVelocity;
 
 
-    public void Awake()
+    private Vector2 movementInput = Vector2.zero;
+
+    private void Awake()
     {
-        playerInputActions = new PlayerInput();
-        playerInputActions.Enable();
+        playerInput = new PlayerInput();
+        playerInput.Enable();
+    }
+    private void Start()
+    {
+        controller = gameObject.GetComponent<CharacterController>();
     }
 
-    public void Update()
+
+
+    public void OnMove(InputAction.CallbackContext context)
     {
-        movementDirection = playerInputActions.PlayerMovement.Movement.ReadValue<Vector2>();
-        transform.position = new Vector3(transform.position.x + movementDirection.x, transform.position.y, transform.position.z + movementDirection.y);
-        Debug.Log(movementDirection);
+        movementInput = context.ReadValue<Vector2>();
     }
+
+
+    void Update()
+    {
+        if (playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0f;
+        }
+
+        Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
+        controller.Move(move * Time.deltaTime * playerSpeed);
+        controller.Move(playerVelocity * Time.deltaTime);
+    }
+
 }
