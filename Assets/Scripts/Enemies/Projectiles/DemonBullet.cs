@@ -4,52 +4,73 @@ using UnityEngine;
 
 public class DemonBullet : MonoBehaviour
 {
-    public GameObject[] players = new GameObject[4];
-    private float[] distance = new float[4];
-    private int closestPlayer = 0;
+    public GameObject[] players = new GameObject[4]; //the array of players
+    private float[] distance = new float[4]; //array of distances from players
+    private int closestPlayer = 0; //spot in array of closest player
 
-    public float speed = 2.0f;
-    private float _damage;
+    public float speed = 2.0f; //movement speed
+    private float _damage; //damage dealt to entities hit
 
-    float minDistance;
-
+    float minDistance; //float for the minimum distance
+    
     private void OnEnable()
     {
+        //track the player's location
         TrackPlayer();
+
+        //start the timer to disable the object
         StartCoroutine(DisableThyself());
 
+        //look at the location of the player
         Vector3 playerPos = new Vector3(players[closestPlayer].transform.position.x, players[closestPlayer].transform.position.y, players[closestPlayer].transform.position.z);
         transform.LookAt(playerPos);
-
+        
+        //set damage values
         _damage = 10;
-
+        
+        //set min distance high so other distances can be lower than it.
         minDistance = float.MaxValue;
     }
 
     private void Update()
     {
+        //move forward
         transform.position += transform.forward * speed * Time.deltaTime;
 
+        //for each player in array
         for (int i = 0; i < players.Length; i++)
         {
-            float thisDistance = Vector3.Distance(transform.position, players[i].transform.position);
-
-            distance[i] = thisDistance;
-
-            if (thisDistance < minDistance)
+            //if the player is in the array
+            if (players[i] != null)
             {
-                minDistance = thisDistance;
-                closestPlayer = i;
-                Debug.Log(closestPlayer);
+                //check the distance between the player and this enemy
+                float thisDistance = Vector3.Distance(transform.position, players[i].transform.position);
+
+                //save the distance
+                distance[i] = thisDistance;
+
+                //if the previous distance is smaller than the minimum distance, set that as the minimum distance
+                if (thisDistance < minDistance)
+                {
+                    minDistance = thisDistance;
+
+                    //set closest player to the player's spot in the array
+                    closestPlayer = i;
+                    Debug.Log(closestPlayer);
+                }
             }
         }
     }
 
+    //track player
     private void TrackPlayer()
     {
+        //check if players are in the sphere collider
         Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, 30);
+        //if the sphere collider is not empty
         if (hitColliders.Length > 0)
         {
+            //for each player in collider sphere, set the player's spot in array
             foreach (Collider hitCollider in hitColliders)
             {
                 if (hitCollider.tag == "Player")
@@ -67,6 +88,7 @@ public class DemonBullet : MonoBehaviour
         }
     }
 
+    //after 6 seconds, disable this game object
     IEnumerator DisableThyself()
     {
         yield return new WaitForSeconds(6);
@@ -76,19 +98,24 @@ public class DemonBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //if this bullet hits player, deal damage and set this game object to disabled
         if (other.CompareTag("Player"))
         {
-            gameObject.SetActive(false);
             //deal damage to the player
+            gameObject.SetActive(false);
         }
+
+        //if this bullet hits blockade or generator set GO to disabled
         if (other.CompareTag("Blockade") || other.CompareTag("Generator"))
         {
             gameObject.SetActive(false);
         }
+
+        //if the object is a demon, deal damage to them
         if (other.CompareTag("Demon"))
         {
-            other.GetComponent<Demon>().hitPoints--;
-            other.GetComponent<Demon>().CheckLives();
+            other.GetComponent<Enemy>().hitPoints--;
+            other.GetComponent<Enemy>().CheckLives();
         }
     }
 }

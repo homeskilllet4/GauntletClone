@@ -11,6 +11,10 @@ TagManager:
   - Ghost
   - Generator
   - PlayerProjectile
+  - Sorcerer
+  - Thief
+  - Lobber
+  - LobberProjectile
   layers:
   - Default
   - TransparentFX
