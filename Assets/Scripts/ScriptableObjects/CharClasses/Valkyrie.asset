@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Valkyrie
   m_EditorClassIdentifier: 
   className: Valkyrie
+  playerMat: {fileID: 2100000, guid: aabee32d989bec245817ca3b09f163e5, type: 2}
   magicPower: 1
   fightPower: 2
   movementSpeed: 2

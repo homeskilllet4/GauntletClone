@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Wizard
   m_EditorClassIdentifier: 
   className: Wizard
+  playerMat: {fileID: 2100000, guid: d06339899661c024b8edba7207d0f238, type: 2}
   magicPower: 2
   fightPower: 1
   movementSpeed: 1
