@@ -37,15 +37,15 @@ public class Generator : MonoBehaviour
         {
             case 1:
                 meshF.mesh = rank1;
-                meshC.sharedMesh = rank1;
+                //meshC.sharedMesh = rank1;
                 break;
             case 2:
                 meshF.mesh = rank2;
-                meshC.sharedMesh = rank2;
+                //meshC.sharedMesh = rank2;
                 break;
             case 3:
                 meshF.mesh = rank3;
-                meshC.sharedMesh = rank3;
+                //meshC.sharedMesh = rank3;
                 break;
         }
     }
@@ -77,9 +77,9 @@ public class Generator : MonoBehaviour
     IEnumerator GetHit()
     {
         _ogMat = GetComponent<Renderer>().material;
-        GetComponent<Renderer>().material = redMat;
+        //GetComponent<Renderer>().material = redMat;
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.0f);
 
         CheckLives();
     }
