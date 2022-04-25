@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour
 
     public Material life1, life2, life3; //materials for each health value
 
+    protected string _tag;
+
     void FixedUpdate()
     {
         //check where the player is and follow them
@@ -88,7 +90,7 @@ public class Enemy : MonoBehaviour
             //for each player in collider sphere, set the player's spot in array
             foreach (Collider hitCollider in hitColliders)
             {
-                if (hitCollider.tag == "Player")
+                if (hitCollider.tag == "Player1" || hitCollider.tag == "Player2" || hitCollider.tag == "Player3" || hitCollider.tag == "Player4")
                 {
                     if (players[0] == null)
                         players[0] = hitCollider.gameObject;

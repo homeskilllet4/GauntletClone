@@ -100,7 +100,7 @@ public class Sorcerer : Enemy
     private void OnTriggerEnter(Collider other)
     {
         //if this enemy is touching the player, set bool to true then activate fight damage
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player4"))
         {
             _isTouchingPlayer = true;
             StartCoroutine(FightPlayer());
@@ -110,7 +110,7 @@ public class Sorcerer : Enemy
     private void OnTriggerExit(Collider other)
     {
         //if the player leaves the trigger zone, stop the coroutine for fighting player
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player4"))
         {
             _isTouchingPlayer = false;
             StopCoroutine(FightPlayer());

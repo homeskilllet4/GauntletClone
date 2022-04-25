@@ -99,7 +99,7 @@ public class DemonBullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //if this bullet hits player, deal damage and set this game object to disabled
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player4"))
         {
             //deal damage to the player
             gameObject.SetActive(false);

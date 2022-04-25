@@ -90,6 +90,10 @@ public class Demon : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player4"))
+        {
+            //deal damage to the player
+        }
         //if it is a magic projectile add _magicPoints to points count and takes away one health then checks if all lives are gone
 
         //if player is hit with fight, add _fightPoints to ponits count and takes away one health then checks if all lives are gone

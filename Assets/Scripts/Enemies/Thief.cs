@@ -55,8 +55,26 @@ public class Thief : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-        //if this enemy hits the player, steal their item
-        if (other.CompareTag("Player"))
-            StealItem();
+        _tag = other.gameObject.tag;
+
+        switch (_tag)
+        {
+            case "Player1":
+                //steal player's item
+                gameObject.SetActive(false);
+                break;
+            case "Player2":
+                //steal player's item
+                gameObject.SetActive(false);
+                break;
+            case "Player3":
+                //steal player's item
+                gameObject.SetActive(false);
+                break;
+            case "Player4":
+                //steal player's item
+                gameObject.SetActive(false);
+                break;
+        }
     }
 }

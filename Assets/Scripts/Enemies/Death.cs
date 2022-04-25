@@ -71,7 +71,7 @@ public class Death : Enemy
     private void OnTriggerEnter(Collider other)
     {
         //if the player enters the trigger range, start draining it's health
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player4"))
             if (_healthDrained <= _drainLimit)
                 StartCoroutine(DrainHealth());
     }
@@ -79,7 +79,7 @@ public class Death : Enemy
     private void OnTriggerExit(Collider other)
     {
         //if the player exits the trigger range, then stop the health drain
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player4"))
             StopCoroutine(DrainHealth());
     }
 }
