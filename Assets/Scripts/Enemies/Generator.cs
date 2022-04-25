@@ -22,7 +22,7 @@ public class Generator : MonoBehaviour
     {
         //set the hit points to the rank set in inspector, set the spawn location of enemies
         _hitPoints = rank;
-        _spawnLoc = new Vector3(transform.position.x + 2, transform.position.y, transform.position.z);
+        _spawnLoc = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
         //start spawning enemies then change the color of the generator based on rank
         StartCoroutine(Spawn());
