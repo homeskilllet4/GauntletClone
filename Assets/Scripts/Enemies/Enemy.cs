@@ -21,8 +21,8 @@ public class Enemy : MonoBehaviour
     private float _moveSpeed = .05f; //base speed
     public int speed = 1; //speed multiplier
 
-    private bool _isOnBlockade = false; //is blockade between the player and enemy
-    private bool _isTouchingBlockade; //is it touching blockade?
+    public bool _isOnBlockade = false; //is blockade between the player and enemy
+    public bool _isTouchingBlockade; //is it touching blockade?
     private bool _isPlayerInCollider; //is the player in the collider?
     //public bool _isMoving; //is this enemy moving
     private RaycastHit hit;
@@ -123,6 +123,8 @@ public class Enemy : MonoBehaviour
         if (Physics.Linecast(transform.position, player.transform.position, out hit))
         {
             Debug.DrawLine(transform.position, player.transform.position);
+            Debug.Log("Hit Tag: " + hit.transform.tag);
+
             //if that object is a wall/blockade
             if (hit.transform.tag == "Blockade")
             {

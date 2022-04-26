@@ -1820,7 +1820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &919132148292819372
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1867,8 +1867,8 @@ MonoBehaviour:
   isShootDamagable: 0
   isFightDamagable: 0
   speed: 1
-  _isOnBlockade: 1
-  _isTouchingBlockade: 1
+  _isOnBlockade: 0
+  _isTouchingBlockade: 0
   players:
   - {fileID: 0}
   - {fileID: 0}
@@ -2969,7 +2969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6420109639929790638, guid: b147d3145c8f282408ea1b14be2a1047, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6420109639929790647, guid: b147d3145c8f282408ea1b14be2a1047, type: 3}
       propertyPath: m_RootOrder
