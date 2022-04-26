@@ -92,8 +92,9 @@ public class Sorcerer : Enemy
             {
                 //damage player
 
-                yield return new WaitForSeconds(attackCooldown);
+
             }
+            yield return new WaitForSeconds(attackCooldown);
         }
     }
 

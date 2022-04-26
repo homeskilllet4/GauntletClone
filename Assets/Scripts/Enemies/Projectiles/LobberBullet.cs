@@ -22,8 +22,11 @@ public class LobberBullet : MonoBehaviour
         StartCoroutine(DisableThyself());
 
         //look at the location of the player
-        Vector3 playerPos = new Vector3(players[closestPlayer].transform.position.x, players[closestPlayer].transform.position.y, players[closestPlayer].transform.position.z);
-        transform.LookAt(playerPos);
+        if (players[closestPlayer] != null)
+        {
+            Vector3 playerPos = new Vector3(players[closestPlayer].transform.position.x, players[closestPlayer].transform.position.y, players[closestPlayer].transform.position.z);
+            transform.LookAt(playerPos);
+        }
 
         //set damage values
         _damage = 10;
