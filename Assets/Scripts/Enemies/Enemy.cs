@@ -21,11 +21,12 @@ public class Enemy : MonoBehaviour
     private float _moveSpeed = .05f; //base speed
     public int speed = 1; //speed multiplier
 
-    public bool _isOnBlockade = false; //is blockade between the player and enemy
-    public bool _isTouchingBlockade; //is it touching blockade?
+    private bool _isOnBlockade = false; //is blockade between the player and enemy
+    private bool _isTouchingBlockade; //is it touching blockade?
     private bool _isPlayerInCollider; //is the player in the collider?
     //public bool _isMoving; //is this enemy moving
     private RaycastHit hit;
+    private bool _isSeeingBlockade;
 
     public GameObject[] players = new GameObject[4]; //array of players
     public float[] distance = new float[4]; //array of distances between player and enemy
@@ -90,19 +91,26 @@ public class Enemy : MonoBehaviour
             //for each player in collider sphere, set the player's spot in array
             foreach (Collider hitCollider in hitColliders)
             {
-                if (hitCollider.tag == "Player1" || hitCollider.tag == "Player2" || hitCollider.tag == "Player3" || hitCollider.tag == "Player4")
+                switch (hitCollider.tag)
                 {
-                    if (players[0] == null)
-                        players[0] = hitCollider.gameObject;
-                    else if (players[1] == null)
-                        players[1] = hitCollider.gameObject;
-                    else if (players[2] == null)
-                        players[2] = hitCollider.gameObject;
-                    else if (players[3] == null)
-                        players[3] = hitCollider.gameObject;
-
-                    //follow the player
-                    Debug.Log("Player In Collider");
+                    case "Player1":
+                        if (players[0] == null)
+                            players[0] = hitCollider.gameObject;
+                        break;
+                    case "Player2":
+                        if (players[1] == null)
+                            players[1] = hitCollider.gameObject;
+                        break;
+                    case "Player3":
+                        if (players[2] == null)
+                            players[2] = hitCollider.gameObject;
+                        break;
+                    case "Player4":
+                        if (players[3] == null)
+                            players[3] = hitCollider.gameObject;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -114,9 +122,13 @@ public class Enemy : MonoBehaviour
         //if object is between the player and this enemy
         if (Physics.Linecast(transform.position, player.transform.position, out hit))
         {
+            Debug.DrawLine(transform.position, player.transform.position);
             //if that object is a wall/blockade
             if (hit.transform.tag == "Blockade")
             {
+                //blockade is in between the enemy and the player
+                _isSeeingBlockade = true;
+
                 //the enemy is touching the blockade
                 if (_isTouchingBlockade)
                 {
@@ -130,11 +142,12 @@ public class Enemy : MonoBehaviour
                 //if blockade is not in the way, then set both blockade bools to false
                 _isOnBlockade = false;
                 _isTouchingBlockade = false;
+                Debug.Log("blockade not found");
             }
         }
 
         //if the enemy is not on a blockade, move towards the player
-        if (_isOnBlockade != true)
+        if (_isSeeingBlockade != true || _isOnBlockade != true)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * _moveSpeed);
             Debug.Log("Moving To Player");
@@ -176,6 +189,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Blockade"))
         {
             _isTouchingBlockade = true;
+            _isOnBlockade = true;
             Debug.Log("Touching blockade");
         }
     }

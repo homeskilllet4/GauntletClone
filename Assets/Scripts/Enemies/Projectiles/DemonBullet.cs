@@ -76,16 +76,26 @@ public class DemonBullet : MonoBehaviour
             //for each player in collider sphere, set the player's spot in array
             foreach (Collider hitCollider in hitColliders)
             {
-                if (hitCollider.tag == "Player")
+                switch (hitCollider.tag)
                 {
-                    if(players[0] == null)
-                        players[0] = hitCollider.gameObject;
-                    else if (players[1] == null)
-                        players[1] = hitCollider.gameObject;
-                    else if (players[2] == null)
-                        players[2] = hitCollider.gameObject;
-                    else if (players[3] == null)
-                        players[3] = hitCollider.gameObject;
+                    case "Player1":
+                        if (players[0] == null)
+                            players[0] = hitCollider.gameObject;
+                        break;
+                    case "Player2":
+                        if (players[1] == null)
+                            players[1] = hitCollider.gameObject;
+                        break;
+                    case "Player3":
+                        if (players[2] == null)
+                            players[2] = hitCollider.gameObject;
+                        break;
+                    case "Player4":
+                        if (players[3] == null)
+                            players[3] = hitCollider.gameObject;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
