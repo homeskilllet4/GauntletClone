@@ -11,6 +11,8 @@ public class Generator : MonoBehaviour
     public float spawnCD = 2.0f; //how often can enemies spawn
     private Vector3 _spawnLoc; //where will the enemy spawn
     public string enemyType; //what type of enemy (tag)
+    public int spawnLimit; //max number of enemies that can be spawned
+    private int _enemiesSpawned; //number of enemies spawned
 
     private int _hitPoints; //how many hit points this generator has
     private int _points = 10; //point value given for destroying this generator
@@ -54,7 +56,7 @@ public class Generator : MonoBehaviour
     private IEnumerator Spawn()
     {
         //infinite loop
-        while (true)
+        while (_enemiesSpawned < spawnLimit)
         {
             //wait for spawn cooldown
             yield return new WaitForSeconds(spawnCD);
@@ -68,6 +70,7 @@ public class Generator : MonoBehaviour
                 enemy.transform.position = _spawnLoc;
                 enemy.GetComponent<Enemy>().rank = rank;
                 enemy.SetActive(true);
+                _enemiesSpawned++;
                 Debug.Log("Spawned " + enemyType);
             }
         }
