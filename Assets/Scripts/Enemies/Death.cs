@@ -8,6 +8,7 @@ public class Death : Enemy
     private int _drainLimit = 200; //how much health can the death drain?
     private int _healthDrained = 0; //how much health has been drained so far?
     private bool _isDrainLimitReached; //have we reached the health drain limit?
+    private int _magicDamageTaken = 20; //damage taken when hit with magic
 
     private void OnEnable()
     {
@@ -74,6 +75,42 @@ public class Death : Enemy
         if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player4"))
             if (_healthDrained <= _drainLimit)
                 StartCoroutine(DrainHealth());
+        switch (other.tag)
+        {
+            case "Player1":
+                playerForPoints = 1;
+                //add points to player
+                break;
+            case "Player2":
+                playerForPoints = 2;
+                //add points to player
+                break;
+            case "Player3":
+                playerForPoints = 3;
+                //add points to player
+                break;
+            case "Player4":
+                playerForPoints = 4;
+                //add points to player
+                break;
+            case "PlayerProjectile":
+                //add _shootPoints to the player
+                gameObject.SetActive(false);
+                break;
+            case "MagicProjectile":
+                hitPoints = hitPoints - _magicDamageTaken;
+                if (hitPoints <= 0)
+                {
+                    //add _magicPoints to the player
+                    gameObject.SetActive(false);
+                }
+                break;
+            case "Potion":
+                hitPoints = 0;
+                //add _potionPoints to player
+                gameObject.SetActive(false);
+                break;
+        }
     }
 
     private void OnTriggerExit(Collider other)

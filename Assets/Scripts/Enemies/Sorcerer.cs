@@ -100,11 +100,54 @@ public class Sorcerer : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-        //if this enemy is touching the player, set bool to true then activate fight damage
-        if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player4"))
+        switch (other.tag)
         {
-            _isTouchingPlayer = true;
-            StartCoroutine(FightPlayer());
+            case "Player1":
+                playerForPoints = 1;
+                _isTouchingPlayer = true;
+                StartCoroutine(FightPlayer());
+                //add points to player
+                break;
+            case "Player2":
+                playerForPoints = 2;
+                _isTouchingPlayer = true;
+                StartCoroutine(FightPlayer());
+                //add points to player
+                break;
+            case "Player3":
+                playerForPoints = 3;
+                _isTouchingPlayer = true;
+                StartCoroutine(FightPlayer());
+                //add points to player
+                break;
+            case "Player4":
+                playerForPoints = 4;
+                _isTouchingPlayer = true;
+                StartCoroutine(FightPlayer());
+                //add points to player
+                break;
+            case "PlayerProjectile":
+                hitPoints--;
+                if (hitPoints <= 0)
+                {
+                    //add _shootPoints to the player
+                    gameObject.SetActive(false);
+                }
+                break;
+            case "MagicProjectile":
+                hitPoints--;
+                if (hitPoints <= 0)
+                {
+                    //add _magicPoints to the player
+                    gameObject.SetActive(false);
+                }
+                break;
+            case "Potion":
+                hitPoints = 0;
+                //add _potionPoints to player
+                gameObject.SetActive(false);
+                break;
+                //need to set up fight damage
         }
     }
 

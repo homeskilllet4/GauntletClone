@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     protected int _shootingPoints; //points awarded for shooting this enemy
     protected int _fightPoints; //points awarded for fighting this enemy
     protected int _generatorPoints; //points awarded for destroying generator
+    protected int _potionPoints = 25; //points awarded for potion kills
 
     protected int _damage; //damage done to player
     public int hitPoints; //amount of life
@@ -31,12 +32,13 @@ public class Enemy : MonoBehaviour
     public GameObject[] players = new GameObject[4]; //array of players
     public float[] distance = new float[4]; //array of distances between player and enemy
     public int closestPlayer = 0; //which enemy in array is the closest
+    protected int playerForPoints;
 
     public Material life1, life2, life3; //materials for each health value
 
     protected string _tag;
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         //check where the player is and follow them
         CheckPlayerPos();
@@ -116,7 +118,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void FollowPlayer(GameObject player)
+    protected void FollowPlayer(GameObject player)
     {
         //move towards the player
         //if object is between the player and this enemy
@@ -185,7 +187,7 @@ public class Enemy : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         //if this enemy is touching the blockade, then set the bool to true so that the enemy will not move through blockade
         if (collision.gameObject.CompareTag("Blockade"))
