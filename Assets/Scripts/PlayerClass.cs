@@ -3,28 +3,40 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
+
 public class PlayerClass : MonoBehaviour
 {
-    private CharClass _charClass;
+    private int playerNum;
+    public CharClass charClass;
     private Material _characterMat;
 
     [SerializeField]
-    private int health;
-    private int keyCount;
-    private int potionCount;
-
-   public void InitailizePlayer(CharClass charClass)
-    {
-        _charClass = charClass;
-        _characterMat = _charClass.playerMat;
-        GetComponent<Renderer>().material = _characterMat;
-    }
+    public string className;
+    public int health;
+    public float movementSpeed;
+    public int keyCount;
+    public int potionCount;
 
     public void Start()
     {
+        //InitializePlayer();
+        GameManager.instance.Addplayer(this);
+    }
+
+
+    public void SetPlayerNum(int num)
+    {
+        playerNum = num;
+    }
+
+    public void InitializePlayer(CharClass charClass)
+    {
+        this.charClass = charClass;
+        this.className = charClass.className;
+        _characterMat = charClass.playerMat;
         health = 600;
         keyCount = 0;
         potionCount = 0;
-
+        GetComponent<Renderer>().material = _characterMat;
     }
 }

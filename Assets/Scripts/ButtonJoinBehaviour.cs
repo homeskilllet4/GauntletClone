@@ -7,18 +7,18 @@ public class ButtonJoinBehaviour : MonoBehaviour
 {
     public void JoinWarrior()
     {
-        GameManager.instance.OnPlayerJoined(0);
+        PlayerManager.instance.OnPlayerJoined(0);
     }
-    public void JoinValkyrie()
+    public void JoinValkeryrie()
     {
-        GameManager.instance.OnPlayerJoined(1);
+        PlayerManager.instance.OnPlayerJoined(1);
     }
     public void JoinWizard()
     {
-        GameManager.instance.OnPlayerJoined(2);
+        PlayerManager.instance.OnPlayerJoined(2);
     }
     public void JoinElf()
     {
-        GameManager.instance.OnPlayerJoined(3);
+        PlayerManager.instance.OnPlayerJoined(3);
     }
 }
