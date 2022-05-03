@@ -87,27 +87,30 @@ public class Lobber : Enemy
     {
         switch (other.tag)
         {
-            case "Player1":
+            case "Player1Projectile":
                 playerForPoints = 1;
-                //add points to player
-                break;
-            case "Player2":
-                playerForPoints = 2;
-                //add points to player
-                break;
-            case "Player3":
-                playerForPoints = 3;
-                //add points to player
-                break;
-            case "Player4":
-                playerForPoints = 4;
-                //add points to player
-                break;
-            case "PlayerProjectile":
                 hitPoints--;
                 if (hitPoints <= 0)
                 {
-                    //add _shootPoints to the player
+                    //UIManager.instance.AddPoints(_shootingPoints, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
+            case "Player2Projectile":
+                playerForPoints = 2;
+                hitPoints--;
+                if (hitPoints <= 0)
+                {
+                    //UIManager.instance.AddPoints(_shootingPoints, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
+            case "Player4Projectile":
+                playerForPoints = 4;
+                hitPoints--;
+                if (hitPoints <= 0)
+                {
+                    //UIManager.instance.AddPoints(_shootingPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;

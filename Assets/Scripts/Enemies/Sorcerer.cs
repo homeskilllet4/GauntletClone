@@ -103,42 +103,66 @@ public class Sorcerer : Enemy
         switch (other.tag)
         {
             case "Player1":
-                playerForPoints = 1;
                 _isTouchingPlayer = true;
                 StartCoroutine(FightPlayer());
-                //add points to player
                 break;
             case "Player2":
-                playerForPoints = 2;
                 _isTouchingPlayer = true;
                 StartCoroutine(FightPlayer());
-                //add points to player
                 break;
             case "Player3":
-                playerForPoints = 3;
                 _isTouchingPlayer = true;
                 StartCoroutine(FightPlayer());
-                //add points to player
                 break;
             case "Player4":
-                playerForPoints = 4;
                 _isTouchingPlayer = true;
                 StartCoroutine(FightPlayer());
-                //add points to player
                 break;
-            case "PlayerProjectile":
-                hitPoints--;
+            //player 1 gives shoot points
+            case "Player1Projectile":
+                playerForPoints = 1;
+                if (isShootDamagable)
+                    hitPoints--;
+                CheckLives();
                 if (hitPoints <= 0)
                 {
-                    //add _shootPoints to the player
+                    //UIManager.instance.AddPoints(_shootingPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;
-            case "MagicProjectile":
-                hitPoints--;
+            //player 2 gives shoot points
+            case "Player2Projectile":
+                playerForPoints = 2;
+                if(isShootDamagable)
+                    hitPoints--;
+                CheckLives();
                 if (hitPoints <= 0)
                 {
-                    //add _magicPoints to the player
+                    //UIManager.instance.AddPoints(_shootingPoints, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
+            //player 3 does magic damage
+            case "Player3Projectile":
+                playerForPoints = 3;
+                if(isMagicDamagable)
+                    hitPoints--;
+                CheckLives();
+                if (hitPoints <= 0)
+                {
+                    //UIManager.instance.AddPoints(_magicPoints, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
+            //player 4 does shoot damage
+            case "Player4Projectile":
+                playerForPoints = 4;
+                if(isShootDamagable)
+                    hitPoints--;
+                CheckLives();
+                if (hitPoints <= 0)
+                {
+                    //UIManager.instance.AddPoints(_shootingPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;

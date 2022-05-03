@@ -94,8 +94,6 @@ public class LobberBullet : MonoBehaviour
                         if (players[3] == null)
                             players[3] = hitCollider.gameObject;
                         break;
-                    default:
-                        break;
                 }
             }
         }
