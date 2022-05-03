@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1677458577485779915}
   - component: {fileID: 1677458577485779914}
   - component: {fileID: 1677458577485779917}
-  - component: {fileID: 1677458577485779916}
+  - component: {fileID: 7102595436885317030}
   - component: {fileID: 1335784591062002243}
   - component: {fileID: 4200845032772563068}
   m_Layer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1677458577485779919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.7299794, y: 0.79580474, z: -9.371628}
-  m_LocalScale: {x: 0.57172, y: 0.57172, z: 0.57172}
+  m_LocalScale: {x: 0.14493103, y: 0.14493103, z: 0.28709388}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1677458577485779916
-SphereCollider:
+--- !u!136 &7102595436885317030
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -94,8 +94,9 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.5468246
+  m_Height: 1.0420693
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1335784591062002243
 MonoBehaviour:
@@ -109,7 +110,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ffd880a025e98e4698652483113a99b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  players:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   speed: 20
 --- !u!54 &4200845032772563068
 Rigidbody:

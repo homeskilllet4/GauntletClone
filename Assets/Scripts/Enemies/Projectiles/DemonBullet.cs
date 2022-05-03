@@ -12,6 +12,7 @@ public class DemonBullet : MonoBehaviour
     private float _damage; //damage dealt to entities hit
 
     float minDistance; //float for the minimum distance
+    public GameObject demon; //the demon that shot the projectile
     
     private void OnEnable()
     {
@@ -125,7 +126,7 @@ public class DemonBullet : MonoBehaviour
         }
 
         //if the object is a demon, deal damage to them
-        if (other.CompareTag("Demon"))
+        if (other.CompareTag("Demon") && other.gameObject != demon)
         {
             other.GetComponent<Enemy>().hitPoints--;
             other.GetComponent<Enemy>().CheckLives();

@@ -74,6 +74,8 @@ public class Demon : Enemy
             {
                 demonProjectile.transform.position = spawnPosition;
                 demonProjectile.transform.rotation = spawnRotation;
+                //set the demon that shot the projectile to this game object
+                demonProjectile.GetComponent<DemonBullet>().demon = gameObject;
                 demonProjectile.SetActive(true);
                 _canShoot = false;
                 Debug.Log("Spawned Projectile");
