@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   className: Elf
   playerMat: {fileID: 2100000, guid: d35045c204760b047bc1238f8bb1f967, type: 2}
-  magicPower: 1
+  projectilePrefab: {fileID: 6917676507939221415, guid: 6cb769a5486ee19488fcd6fe382d4074, type: 3}
   fightPower: 2
   movementSpeed: 3
   shotSpeed: 3

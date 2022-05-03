@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   className: Valkyrie
   playerMat: {fileID: 2100000, guid: aabee32d989bec245817ca3b09f163e5, type: 2}
-  magicPower: 1
+  projectilePrefab: {fileID: 6917676507939221415, guid: 6cb769a5486ee19488fcd6fe382d4074, type: 3}
   fightPower: 2
   movementSpeed: 2
   shotSpeed: 2

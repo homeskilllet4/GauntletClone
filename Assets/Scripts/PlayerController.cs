@@ -9,13 +9,12 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private float playerSpeed = 2.0f;
+    private GameObject projectilePrefab;
     [SerializeField]
-    private float gravityValue = -9.8f;
+    private float playerSpeed = 2.0f;
 
     private CharacterController controller;
     private PlayerInput playerInput;
-
     private Vector3 playerVelocity;
 
 
@@ -29,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        projectilePrefab = GetComponent<PlayerClass>()._charClass.projectilePrefab;
     }
 
 
@@ -38,8 +38,16 @@ public class PlayerController : MonoBehaviour
         movementInput = context.ReadValue<Vector2>();
     }
 
+    public void Attack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+             
+        }
+    }
 
-    void Update()
+
+    void FixedUpdate()
     {
         if (playerVelocity.y < 0)
         {
@@ -49,6 +57,10 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
         controller.Move(move * Time.deltaTime * playerSpeed);
         controller.Move(playerVelocity * Time.deltaTime);
+        Quaternion targetRotation = Quaternion.LookRotation(move);
+        if(move != Vector3.zero)
+            transform.rotation = targetRotation;
+        //Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
     }
 
 }

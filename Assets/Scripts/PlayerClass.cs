@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerClass : MonoBehaviour
 {
-    private CharClass _charClass;
+    public CharClass _charClass;
     private Material _characterMat;
 
     [SerializeField]
@@ -16,6 +16,7 @@ public class PlayerClass : MonoBehaviour
    public void InitailizePlayer(CharClass charClass)
     {
         _charClass = charClass;
+
         _characterMat = _charClass.playerMat;
         GetComponent<Renderer>().material = _characterMat;
     }
