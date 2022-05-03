@@ -111,15 +111,28 @@ public class LobberBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if this bullet hits player, deal damage and set this game object to disabled
-        if (other.CompareTag("Player"))
+        switch (other.tag)
         {
-            //deal damage to the player
-            gameObject.SetActive(false);
+            case "Player1":
+                //deal damage to the player
+                gameObject.SetActive(false);
+                break;
+            case "Player2":
+                //deal damage to the player
+                gameObject.SetActive(false);
+                break;
+            case "Player3":
+                //deal damage to the player
+                gameObject.SetActive(false);
+                break;
+            case "Player4":
+                //deal damage to the player
+                gameObject.SetActive(false);
+                break;
         }
 
-        //if this bullet hits blockade or generator set GO to disabled
-        if (other.CompareTag("Blockade") || other.CompareTag("Generator"))
+                //if this bullet hits blockade or generator set GO to disabled
+                if (other.CompareTag("Blockade") || other.CompareTag("Generator"))
         {
             gameObject.SetActive(false);
         }
