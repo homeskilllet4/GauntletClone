@@ -12,6 +12,7 @@ public class DemonBullet : MonoBehaviour
     private float _damage; //damage dealt to entities hit
 
     float minDistance; //float for the minimum distance
+    public GameObject demon; //the demon that shot the projectile
     
     private void OnEnable()
     {
@@ -22,8 +23,11 @@ public class DemonBullet : MonoBehaviour
         StartCoroutine(DisableThyself());
 
         //look at the location of the player
-        Vector3 playerPos = new Vector3(players[closestPlayer].transform.position.x, players[closestPlayer].transform.position.y, players[closestPlayer].transform.position.z);
-        transform.LookAt(playerPos);
+        if (players[closestPlayer] != null)
+        {
+            Vector3 playerPos = new Vector3(players[closestPlayer].transform.position.x, players[closestPlayer].transform.position.y, players[closestPlayer].transform.position.z);
+            transform.LookAt(playerPos);
+        }
         
         //set damage values
         _damage = 10;
@@ -73,16 +77,26 @@ public class DemonBullet : MonoBehaviour
             //for each player in collider sphere, set the player's spot in array
             foreach (Collider hitCollider in hitColliders)
             {
-                if (hitCollider.tag == "Player")
+                switch (hitCollider.tag)
                 {
-                    if(players[0] == null)
-                        players[0] = hitCollider.gameObject;
-                    else if (players[1] == null)
-                        players[1] = hitCollider.gameObject;
-                    else if (players[2] == null)
-                        players[2] = hitCollider.gameObject;
-                    else if (players[3] == null)
-                        players[3] = hitCollider.gameObject;
+                    case "Player1":
+                        if (players[0] == null)
+                            players[0] = hitCollider.gameObject;
+                        break;
+                    case "Player2":
+                        if (players[1] == null)
+                            players[1] = hitCollider.gameObject;
+                        break;
+                    case "Player3":
+                        if (players[2] == null)
+                            players[2] = hitCollider.gameObject;
+                        break;
+                    case "Player4":
+                        if (players[3] == null)
+                            players[3] = hitCollider.gameObject;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -99,10 +113,24 @@ public class DemonBullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //if this bullet hits player, deal damage and set this game object to disabled
-        if (other.CompareTag("Player"))
+        switch (other.tag)
         {
-            //deal damage to the player
-            gameObject.SetActive(false);
+            case "Player1":
+                //deal damage to the player
+                gameObject.SetActive(false);
+                break;
+            case "Player2":
+                //deal damage to the player
+                gameObject.SetActive(false);
+                break;
+            case "Player3":
+                //deal damage to the player
+                gameObject.SetActive(false);
+                break;
+            case "Player4":
+                //deal damage to the player
+                gameObject.SetActive(false);
+                break;
         }
 
         //if this bullet hits blockade or generator set GO to disabled
@@ -112,7 +140,7 @@ public class DemonBullet : MonoBehaviour
         }
 
         //if the object is a demon, deal damage to them
-        if (other.CompareTag("Demon"))
+        if (other.CompareTag("Demon") && other.gameObject != demon)
         {
             other.GetComponent<Enemy>().hitPoints--;
             other.GetComponent<Enemy>().CheckLives();

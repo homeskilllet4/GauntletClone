@@ -1,62 +1,76 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
-    private List<GameObject> players;
-
-    public List<CharClass> classes;
-    
-    public GameObject playerPref;
-    public Transform spawnPoint;
-
-    public int playerCount;
-    public int controllerCount;
+    public List<PlayerClass> players;
+    public List<int> playerScores;
+    public List<int> playerKeys;
+    public List<int> playerPotions;
 
 
-    void Start()
+    //Publicly assigned text objects for each individual player class.
+    [Tooltip("Player UI elements")]
+    public Text WarriorScore;
+    public Text WarriorHealth;
+    public Text ValkyrieScore;
+    public Text ValkyrieHealth;
+    public Text WizardScore;
+    public Text WizardHealth;
+    public Text ElfScore;
+    public Text ElfHealth;
+
+    private void Start()
     {
-        players = new List<GameObject>();
-
-        //Get inititial controller count (searching for xbox controllers for now)
-        playerCount = 0;
-        RefreshControllers();
+        players = new List<PlayerClass>();
     }
 
-    public void RefreshControllers()
+    public void UpdateUI()
     {
-        controllerCount = 0;
-        for (int i = 0; i < InputSystem.devices.Count; i++)
+        foreach(PlayerClass player in players)
         {
-            if (InputSystem.devices[i].displayName == "Xbox Controller")
-                controllerCount++;
+            string name = player.charClass.className;
+            switch (name)
+            {
+                case "Warrior":
+                    WarriorHealth.text = player.health.ToString();
+                    break;
+                case "Valkyrie":
+                    ValkyrieHealth.text = player.health.ToString();
+                    break;
+                case "Wizard":
+                    WizardHealth.text = player.health.ToString();
+                    break;
+                case "Elf":
+                    ElfHealth.text = player.health.ToString();
+                    break;
+            }
         }
     }
-   
-    public void OnPlayerJoined(int index)
-    {
-        Debug.Log("Attempting to add player");
 
-        //Check for update controller count
-        RefreshControllers();
-        if(playerCount < controllerCount)
-        {
-            Debug.Log("Player added");
-            playerCount++;
-            GameObject playerInstance = Instantiate(playerPref, spawnPoint.position, Quaternion.identity);
-            playerInstance.name = "Player" + playerCount;
-            CharClass tempCharClass = classes[index];
-            playerInstance.AddComponent<PlayerClass>();
-            playerInstance.GetComponent<PlayerClass>().InitailizePlayer(tempCharClass);
-            players.Add(playerInstance);
-        }
+    public void AddPoints(int pointsToAdd, int playerNum)
+    {
+        playerScores[playerNum] += pointsToAdd;
+    }
+
+    public void Addplayer(PlayerClass newPlayer)
+    {
+        if(players.Count < 4)
+            players.Add(newPlayer);
         else
         {
-            Debug.Log("Not enough valid controllers - Try Plugging in another device");
+            Debug.Log("Too many players, cannot add to list");
         }
+    }
+
+
+
+    IEnumerator UIRefresh()
+    {
+        yield return new WaitForSeconds(.25f);
+        UpdateUI();
     }
 }

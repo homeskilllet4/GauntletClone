@@ -22,8 +22,11 @@ public class LobberBullet : MonoBehaviour
         StartCoroutine(DisableThyself());
 
         //look at the location of the player
-        Vector3 playerPos = new Vector3(players[closestPlayer].transform.position.x, players[closestPlayer].transform.position.y, players[closestPlayer].transform.position.z);
-        transform.LookAt(playerPos);
+        if (players[closestPlayer] != null)
+        {
+            Vector3 playerPos = new Vector3(players[closestPlayer].transform.position.x, players[closestPlayer].transform.position.y, players[closestPlayer].transform.position.z);
+            transform.LookAt(playerPos);
+        }
 
         //set damage values
         _damage = 10;
@@ -73,16 +76,24 @@ public class LobberBullet : MonoBehaviour
             //for each player in collider sphere, set the player's spot in array
             foreach (Collider hitCollider in hitColliders)
             {
-                if (hitCollider.tag == "Player")
+                switch (hitCollider.tag)
                 {
-                    if (players[0] == null)
-                        players[0] = hitCollider.gameObject;
-                    else if (players[1] == null)
-                        players[1] = hitCollider.gameObject;
-                    else if (players[2] == null)
-                        players[2] = hitCollider.gameObject;
-                    else if (players[3] == null)
-                        players[3] = hitCollider.gameObject;
+                    case "Player1":
+                        if (players[0] == null)
+                            players[0] = hitCollider.gameObject;
+                        break;
+                    case "Player2":
+                        if (players[1] == null)
+                            players[1] = hitCollider.gameObject;
+                        break;
+                    case "Player3":
+                        if (players[2] == null)
+                            players[2] = hitCollider.gameObject;
+                        break;
+                    case "Player4":
+                        if (players[3] == null)
+                            players[3] = hitCollider.gameObject;
+                        break;
                 }
             }
         }
@@ -98,15 +109,28 @@ public class LobberBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if this bullet hits player, deal damage and set this game object to disabled
-        if (other.CompareTag("Player"))
+        switch (other.tag)
         {
-            //deal damage to the player
-            gameObject.SetActive(false);
+            case "Player1":
+                //deal damage to the player
+                gameObject.SetActive(false);
+                break;
+            case "Player2":
+                //deal damage to the player
+                gameObject.SetActive(false);
+                break;
+            case "Player3":
+                //deal damage to the player
+                gameObject.SetActive(false);
+                break;
+            case "Player4":
+                //deal damage to the player
+                gameObject.SetActive(false);
+                break;
         }
 
-        //if this bullet hits blockade or generator set GO to disabled
-        if (other.CompareTag("Blockade") || other.CompareTag("Generator"))
+                //if this bullet hits blockade or generator set GO to disabled
+                if (other.CompareTag("Blockade") || other.CompareTag("Generator"))
         {
             gameObject.SetActive(false);
         }

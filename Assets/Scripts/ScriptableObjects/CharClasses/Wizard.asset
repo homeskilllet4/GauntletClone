@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   className: Wizard
   playerMat: {fileID: 2100000, guid: d06339899661c024b8edba7207d0f238, type: 2}
-  projectilePrefab: {fileID: 6917676507939221415, guid: 6cb769a5486ee19488fcd6fe382d4074, type: 3}
-  fightPower: 1
+  playerProjectile: {fileID: 5188135419035452970, guid: 134bc2b5401f59649b895aab77cb54c8, type: 3}
   movementSpeed: 1
   shotSpeed: 3
   armor: 0
