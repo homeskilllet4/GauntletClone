@@ -5,6 +5,7 @@ public class CharClass : ScriptableObject
 {
     public string className;
     public Material playerMat;
+    public GameObject playerProjectile;
    
     [Range(1,3), Tooltip("Player speed: 1=slow, 2=moderate, 3=fast")]
     public int movementSpeed;

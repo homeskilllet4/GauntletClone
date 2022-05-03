@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private PlayerInput playerInput;
 
+    public GameObject playerProjectile;
+    public GameObject projectileSpawn;
+
     private Vector3 playerVelocity;
 
 
@@ -28,16 +31,31 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
+        StartCoroutine(SpawnWait());
         controller = gameObject.GetComponent<CharacterController>();
     }
 
-
+    IEnumerator SpawnWait()
+    {
+        yield return new WaitForSeconds(.2f);
+        playerProjectile = GetComponent<PlayerClass>().charClass.playerProjectile;
+    }
 
 
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
     }
+
+
+    public void PlayerAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Instantiate(playerProjectile, projectileSpawn.transform.position, transform.rotation);
+        }
+    }
+
 
 
     void Update()
@@ -50,6 +68,9 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
         controller.Move(move * Time.deltaTime * playerSpeed);
         controller.Move(playerVelocity * Time.deltaTime);
+        transform.rotation = Quaternion.LookRotation(move);
+
+
     }
 
 }
