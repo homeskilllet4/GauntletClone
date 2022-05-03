@@ -171,7 +171,18 @@ public class Sorcerer : Enemy
                 //add _potionPoints to player
                 gameObject.SetActive(false);
                 break;
-                //need to set up fight damage
+            //player 1 fight damage
+            case "FightWeapon":
+                playerForPoints = 1;
+                if (isFightDamagable)
+                    hitPoints--;
+                CheckLives();
+                if (hitPoints <= 0)
+                {
+                    //UIManager.instance.AddPoints(_fightPoints, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
         }
     }
 
