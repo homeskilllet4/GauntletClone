@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 1729821324964320680}
   - component: {fileID: 1729821324964320681}
   - component: {fileID: 1729821324964320682}
-  - component: {fileID: 1729821324964320683}
+  - component: {fileID: 475094004875961306}
   - component: {fileID: 1729821324964320727}
   - component: {fileID: 5210463978700766679}
   - component: {fileID: 1729821324964320684}
+  - component: {fileID: 6611545339874789842}
   m_Layer: 0
   m_Name: Sorcerer
   m_TagString: Sorcerer
@@ -43,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1729821324964320685}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -3493870404480440094, guid: a100376594b660541b9e253e595c7b3b, type: 3}
 --- !u!23 &1729821324964320682
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -85,7 +86,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1729821324964320683
+--- !u!65 &475094004875961306
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,8 +97,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.46649688, y: 2.1169941, z: 0.8303342}
+  m_Center: {x: 0, y: 1.0515565, z: 0}
 --- !u!65 &1729821324964320727
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -109,8 +110,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.46649688, y: 2.1169941, z: 0.8303342}
+  m_Center: {x: 0, y: 1.0515565, z: 0}
 --- !u!54 &5210463978700766679
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -163,3 +164,18 @@ MonoBehaviour:
   invisTime: 2
   invisMat: {fileID: 2100000, guid: e830464a90b0e1847892e53067355d60, type: 2}
   attackCooldown: 2
+--- !u!111 &6611545339874789842
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729821324964320685}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

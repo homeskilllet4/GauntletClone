@@ -74,6 +74,8 @@ public class Demon : Enemy
             {
                 demonProjectile.transform.position = spawnPosition;
                 demonProjectile.transform.rotation = spawnRotation;
+                //set the demon that shot the projectile to this game object
+                demonProjectile.GetComponent<DemonBullet>().demon = gameObject;
                 demonProjectile.SetActive(true);
                 _canShoot = false;
                 Debug.Log("Spawned Projectile");
@@ -90,11 +92,47 @@ public class Demon : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-        //if it is a magic projectile add _magicPoints to points count and takes away one health then checks if all lives are gone
-
-        //if player is hit with fight, add _fightPoints to ponits count and takes away one health then checks if all lives are gone
-
-        //if it is a shoot projectile, add _shootPoints to points count and takes away one health then checks if all lives are gone
+        switch (other.tag)
+        {
+            case "Player1":
+                playerForPoints = 1;
+                //add points to player
+                break;
+            case "Player2":
+                playerForPoints = 2;
+                //add points to player
+                break;
+            case "Player3":
+                playerForPoints = 3;
+                //add points to player
+                break;
+            case "Player4":
+                playerForPoints = 4;
+                //add points to player
+                break;
+            case "PlayerProjectile":
+                hitPoints--;
+                if (hitPoints <= 0)
+                {
+                    //add _shootPoints to the player
+                    gameObject.SetActive(false);
+                }
+                break;
+            case "MagicProjectile":
+                hitPoints--;
+                if (hitPoints <= 0)
+                {
+                    //add _magicPoints to the player
+                    gameObject.SetActive(false);
+                }
+                break;
+            case "Potion":
+                hitPoints = 0;
+                //add _potionPoints to player
+                gameObject.SetActive(false);
+                break;
+            //need to set up fight damage
+        }
     }
 
 

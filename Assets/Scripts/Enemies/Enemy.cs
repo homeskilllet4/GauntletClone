@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     protected int _shootingPoints; //points awarded for shooting this enemy
     protected int _fightPoints; //points awarded for fighting this enemy
     protected int _generatorPoints; //points awarded for destroying generator
+    protected int _potionPoints = 25; //points awarded for potion kills
 
     protected int _damage; //damage done to player
     public int hitPoints; //amount of life
@@ -21,19 +22,23 @@ public class Enemy : MonoBehaviour
     private float _moveSpeed = .05f; //base speed
     public int speed = 1; //speed multiplier
 
-    private bool _isOnBlockade = false; //is blockade between the player and enemy
-    private bool _isTouchingBlockade; //is it touching blockade?
+    public bool _isOnBlockade = false; //is blockade between the player and enemy
+    public bool _isTouchingBlockade; //is it touching blockade?
     private bool _isPlayerInCollider; //is the player in the collider?
     //public bool _isMoving; //is this enemy moving
     private RaycastHit hit;
+    private bool _isSeeingBlockade;
 
     public GameObject[] players = new GameObject[4]; //array of players
     public float[] distance = new float[4]; //array of distances between player and enemy
     public int closestPlayer = 0; //which enemy in array is the closest
+    protected int playerForPoints;
 
     public Material life1, life2, life3; //materials for each health value
 
-    void FixedUpdate()
+    protected string _tag;
+
+    protected virtual void FixedUpdate()
     {
         //check where the player is and follow them
         CheckPlayerPos();
@@ -88,33 +93,46 @@ public class Enemy : MonoBehaviour
             //for each player in collider sphere, set the player's spot in array
             foreach (Collider hitCollider in hitColliders)
             {
-                if (hitCollider.tag == "Player")
+                switch (hitCollider.tag)
                 {
-                    if (players[0] == null)
-                        players[0] = hitCollider.gameObject;
-                    else if (players[1] == null)
-                        players[1] = hitCollider.gameObject;
-                    else if (players[2] == null)
-                        players[2] = hitCollider.gameObject;
-                    else if (players[3] == null)
-                        players[3] = hitCollider.gameObject;
-
-                    //follow the player
-                    Debug.Log("Player In Collider");
+                    case "Player1":
+                        if (players[0] == null)
+                            players[0] = hitCollider.gameObject;
+                        break;
+                    case "Player2":
+                        if (players[1] == null)
+                            players[1] = hitCollider.gameObject;
+                        break;
+                    case "Player3":
+                        if (players[2] == null)
+                            players[2] = hitCollider.gameObject;
+                        break;
+                    case "Player4":
+                        if (players[3] == null)
+                            players[3] = hitCollider.gameObject;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
     }
 
-    private void FollowPlayer(GameObject player)
+    protected void FollowPlayer(GameObject player)
     {
         //move towards the player
         //if object is between the player and this enemy
         if (Physics.Linecast(transform.position, player.transform.position, out hit))
         {
+            Debug.DrawLine(transform.position, player.transform.position);
+            Debug.Log("Hit Tag: " + hit.transform.tag);
+
             //if that object is a wall/blockade
             if (hit.transform.tag == "Blockade")
             {
+                //blockade is in between the enemy and the player
+                _isSeeingBlockade = true;
+
                 //the enemy is touching the blockade
                 if (_isTouchingBlockade)
                 {
@@ -128,11 +146,12 @@ public class Enemy : MonoBehaviour
                 //if blockade is not in the way, then set both blockade bools to false
                 _isOnBlockade = false;
                 _isTouchingBlockade = false;
+                Debug.Log("blockade not found");
             }
         }
 
         //if the enemy is not on a blockade, move towards the player
-        if (_isOnBlockade != true)
+        if (_isSeeingBlockade != true || _isOnBlockade != true)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * _moveSpeed);
             Debug.Log("Moving To Player");
@@ -168,12 +187,13 @@ public class Enemy : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         //if this enemy is touching the blockade, then set the bool to true so that the enemy will not move through blockade
         if (collision.gameObject.CompareTag("Blockade"))
         {
             _isTouchingBlockade = true;
+            _isOnBlockade = true;
             Debug.Log("Touching blockade");
         }
     }
