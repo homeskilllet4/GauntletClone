@@ -126,7 +126,7 @@ public class Sorcerer : Enemy
                 CheckLives();
                 if (hitPoints <= 0)
                 {
-                    //UIManager.instance.AddPoints(_shootingPoints, playerForPoints);
+                    GameManager.instance.AddPoints(_shootingPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;
@@ -138,7 +138,7 @@ public class Sorcerer : Enemy
                 CheckLives();
                 if (hitPoints <= 0)
                 {
-                    //UIManager.instance.AddPoints(_shootingPoints, playerForPoints);
+                    GameManager.instance.AddPoints(_shootingPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;
@@ -150,7 +150,7 @@ public class Sorcerer : Enemy
                 CheckLives();
                 if (hitPoints <= 0)
                 {
-                    //UIManager.instance.AddPoints(_magicPoints, playerForPoints);
+                    GameManager.instance.AddPoints(_magicPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;
@@ -162,13 +162,14 @@ public class Sorcerer : Enemy
                 CheckLives();
                 if (hitPoints <= 0)
                 {
-                    //UIManager.instance.AddPoints(_shootingPoints, playerForPoints);
+                    GameManager.instance.AddPoints(_shootingPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;
             case "Potion":
+                //gotta track the player
                 hitPoints = 0;
-                //add _potionPoints to player
+                GameManager.instance.AddPoints(_potionPoints, playerForPoints);
                 gameObject.SetActive(false);
                 break;
             //player 1 fight damage
@@ -179,7 +180,7 @@ public class Sorcerer : Enemy
                 CheckLives();
                 if (hitPoints <= 0)
                 {
-                    //UIManager.instance.AddPoints(_fightPoints, playerForPoints);
+                    GameManager.instance.AddPoints(_fightPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;
