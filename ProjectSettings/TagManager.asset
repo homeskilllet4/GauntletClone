@@ -23,6 +23,10 @@ TagManager:
   - Player3
   - Player4
   - Death
+  - Player1Projectile
+  - Player2Projectile
+  - Player3Projectile
+  - Player4Projectile
   layers:
   - Default
   - TransparentFX

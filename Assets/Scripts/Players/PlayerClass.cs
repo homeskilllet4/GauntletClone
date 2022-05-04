@@ -10,6 +10,8 @@ public class PlayerClass : MonoBehaviour
     public CharClass charClass;
     private Material _characterMat;
 
+    
+
     [SerializeField]
     public string className;
     public int health;
@@ -33,6 +35,8 @@ public class PlayerClass : MonoBehaviour
     {
         this.charClass = charClass;
         this.className = charClass.className;
+        this.tag = charClass.playerTag;
+        movementSpeed = charClass.movementSpeed;
         _characterMat = charClass.playerMat;
         health = 600;
         keyCount = 0;

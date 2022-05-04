@@ -31,6 +31,8 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,8 @@ public class ObjectPooler : MonoBehaviour
             }
         }
     }
+
+
 
     public GameObject GetPooledObject(string tag)
     {

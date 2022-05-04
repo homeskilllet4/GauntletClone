@@ -53,6 +53,9 @@ public class PlayerManager : Singleton<PlayerManager>
         {
             Debug.Log("Player added");
             playerCount++;
+
+            spawnPoint = GameObject.Find("Start").transform.position;
+
             GameObject playerInstance = Instantiate(playerPref, spawnPoint, Quaternion.identity);
             playerInstance.name = "Player" + playerCount;
             CharClass tempCharClass = classes[index];
