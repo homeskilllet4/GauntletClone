@@ -16,6 +16,7 @@ public class Generator : MonoBehaviour
 
     private int _hitPoints; //how many hit points this generator has
     private int _points = 10; //point value given for destroying this generator
+    private int playerForPoints;
 
     private Material _ogMat; //original material
     public Material redMat; //mat to change color to when hit
@@ -111,13 +112,76 @@ public class Generator : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if the player or demon hits the generator with a projectile, take away a hit point then change the color
-        if (other.CompareTag("DemonProjectile") || other.CompareTag("PlayerProjectile"))
+        switch (other.tag)
         {
-            StartCoroutine(GetHit());
-            _hitPoints--;
-            //CheckLives();
-            //add points for killing generator
+            //player 1 gives shoot points
+            case "Player1Projectile":
+                playerForPoints = 1;
+                _hitPoints--;
+                CheckLives();
+                if (_hitPoints <= 0)
+                {
+                    GameManager.instance.AddPoints(_points, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
+            //demon projectile gives shoot points
+            case "DemonProjectile":
+                _hitPoints--;
+                CheckLives();
+                if (_hitPoints <= 0)
+                    gameObject.SetActive(false);
+                break;
+            //player 2 gives shoot points
+            case "Player2Projectile":
+                playerForPoints = 2;
+                _hitPoints--;
+                CheckLives();
+                if (_hitPoints <= 0)
+                {
+                    GameManager.instance.AddPoints(_points, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
+            //player 3 does magic damage
+            case "Player3Projectile":
+                playerForPoints = 3;
+                _hitPoints--;
+                CheckLives();
+                if (_hitPoints <= 0)
+                {
+                    GameManager.instance.AddPoints(_points, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
+            //player 4 does shoot damage
+            case "Player4Projectile":
+                playerForPoints = 4;
+                _hitPoints--;
+                CheckLives();
+                if (_hitPoints <= 0)
+                {
+                    GameManager.instance.AddPoints(_points, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
+            case "Potion":
+                //gotta track the player
+                _hitPoints = 0;
+                GameManager.instance.AddPoints(_points, playerForPoints);
+                gameObject.SetActive(false);
+                break;
+            //player 1 fight damage
+            case "FightWeapon":
+                playerForPoints = 1;
+                _hitPoints--;
+                CheckLives();
+                if (_hitPoints <= 0)
+                {
+                    GameManager.instance.AddPoints(_points, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
         }
     }
 }
