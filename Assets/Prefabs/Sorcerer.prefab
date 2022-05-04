@@ -146,6 +146,8 @@ MonoBehaviour:
   isShootDamagable: 0
   isFightDamagable: 0
   speed: 1
+  _isOnBlockade: 0
+  _isTouchingBlockade: 0
   players:
   - {fileID: 0}
   - {fileID: 0}
@@ -162,7 +164,7 @@ MonoBehaviour:
   life3: {fileID: 2100000, guid: cd18d6ec16d81a74b88d5c198eb38e6e, type: 2}
   invisCD: 3
   invisTime: 2
-  invisMat: {fileID: 2100000, guid: e830464a90b0e1847892e53067355d60, type: 2}
+  invisMat: {fileID: 2100000, guid: f506b812c15546b44951bc1b65f51dbf, type: 2}
   attackCooldown: 2
 --- !u!111 &6611545339874789842
 Animation:
