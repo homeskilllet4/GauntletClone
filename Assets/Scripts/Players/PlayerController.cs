@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(.2f);
         playerProjectile = GetComponent<PlayerClass>().charClass.playerProjectile;
+        playerProjectile.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
     }
 
 
@@ -68,7 +69,8 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
         controller.Move(move * Time.deltaTime * playerSpeed);
         controller.Move(playerVelocity * Time.deltaTime);
-        transform.rotation = Quaternion.LookRotation(move);
+        if(move != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(move);
 
 
     }

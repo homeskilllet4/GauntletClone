@@ -20,7 +20,7 @@ public class PlayerClass : MonoBehaviour
     public void Start()
     {
         //InitializePlayer();
-        GameManager.instance.Addplayer(this);
+        GameManager.instance.AddPlayer(this);
     }
 
 

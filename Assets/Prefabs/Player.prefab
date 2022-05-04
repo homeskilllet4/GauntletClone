@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1672671292730620234}
+  - component: {fileID: 367524870059988639}
   - component: {fileID: 1672671292730620235}
   - component: {fileID: 1672671292730620232}
   - component: {fileID: 1672671292730620229}
@@ -38,6 +39,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &367524870059988639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672671292730620230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78fc009c6eef61b4d9b9e441d9df7fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charClass: {fileID: 11400000, guid: bfd0983032ea223499fb181d71726ce3, type: 2}
+  className: 
+  health: 0
+  movementSpeed: 0
+  keyCount: 0
+  potionCount: 0
 --- !u!114 &1672671292730620235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,9 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a28da64c01281408d118f2325a0374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 5
+  playerSpeed: 3
   gravityValue: -9.8
-  playerProjectile: {fileID: 0}
+  playerProjectile: {fileID: 5188135419035452970, guid: 134bc2b5401f59649b895aab77cb54c8, type: 3}
   projectileSpawn: {fileID: 4357296936232911519}
 --- !u!33 &1672671292730620229
 MeshFilter:

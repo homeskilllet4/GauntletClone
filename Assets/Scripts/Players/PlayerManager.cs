@@ -12,7 +12,7 @@ public class PlayerManager : Singleton<PlayerManager>
     public List<CharClass> classes;
     
     public GameObject playerPref;
-    public Transform spawnPoint;
+    public Vector3 spawnPoint;
 
     public int playerCount;
     public int controllerCount;
@@ -20,12 +20,16 @@ public class PlayerManager : Singleton<PlayerManager>
 
     void Start()
     {
+        //setting spawn to Vector3.zero
+        spawnPoint = Vector3.zero;
+
         players = new List<GameObject>();
 
         //Get inititial controller count (searching for xbox controllers for now)
         playerCount = 0;
         RefreshControllers();
     }
+
 
     public void RefreshControllers()
     {
@@ -36,6 +40,8 @@ public class PlayerManager : Singleton<PlayerManager>
                 controllerCount++;
         }
     }
+
+
    
     public void OnPlayerJoined(int index)
     {
@@ -47,10 +53,11 @@ public class PlayerManager : Singleton<PlayerManager>
         {
             Debug.Log("Player added");
             playerCount++;
-            GameObject playerInstance = Instantiate(playerPref, spawnPoint.position, Quaternion.identity);
+            GameObject playerInstance = Instantiate(playerPref, spawnPoint, Quaternion.identity);
             playerInstance.name = "Player" + playerCount;
             CharClass tempCharClass = classes[index];
-            playerInstance.AddComponent<PlayerClass>();
+            if(playerInstance.GetComponent<PlayerClass>() == null)
+                playerInstance.AddComponent<PlayerClass>();
             playerInstance.GetComponent<PlayerClass>().InitializePlayer(tempCharClass);
             players.Add(playerInstance);
         }
