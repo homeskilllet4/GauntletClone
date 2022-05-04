@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         playerProjectile = GetComponent<PlayerClass>().charClass.playerProjectile;
         playerProjectile.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
+        playerSpeed = GetComponent<PlayerClass>().movementSpeed;
     }
 
 

@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
     private bool _isPlayerInCollider; //is the player in the collider?
     //public bool _isMoving; //is this enemy moving
     private RaycastHit hit;
-    private bool _isSeeingBlockade;
+    public bool _isSeeingBlockade;
 
     public GameObject[] players = new GameObject[4]; //array of players
     public float[] distance = new float[4]; //array of distances between player and enemy
@@ -71,12 +71,15 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        //set closest player's position and look in their direction
-        Vector3 playerPos = new Vector3(players[closestPlayer].transform.position.x, players[closestPlayer].transform.position.y, players[closestPlayer].transform.position.z);
-        transform.LookAt(playerPos);
+        if(players.Length > 0)
+        {
+            //set closest player's position and look in their direction
+            Vector3 playerPos = new Vector3(players[closestPlayer].transform.position.x, players[closestPlayer].transform.position.y, players[closestPlayer].transform.position.z);
+            transform.LookAt(playerPos);
 
-        //follow the closest player
-        FollowPlayer(players[closestPlayer]);
+            //follow the closest player
+            FollowPlayer(players[closestPlayer]);
+        }
     }
 
     //find the player position

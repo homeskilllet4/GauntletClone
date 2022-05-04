@@ -53,9 +53,13 @@ public class Generator : MonoBehaviour
         }
     }
 
+
+
     //grab enemies from object pool
     private IEnumerator Spawn()
     {
+        yield return new WaitForSeconds(1.5f);
+
         //infinite loop
         while (_enemiesSpawned < spawnLimit)
         {
@@ -77,6 +81,8 @@ public class Generator : MonoBehaviour
         }
     }
 
+
+
     //change material of the generator to red when hit for a brief period
     IEnumerator GetHit()
     {
@@ -87,6 +93,8 @@ public class Generator : MonoBehaviour
 
         CheckLives();
     }
+
+
 
     //change material based on hitpoints
     private void CheckLives()
@@ -109,6 +117,8 @@ public class Generator : MonoBehaviour
                 break;
         }
     }
+
+
 
     private void OnTriggerEnter(Collider other)
     {

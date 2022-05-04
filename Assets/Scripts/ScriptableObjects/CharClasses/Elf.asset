@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Elf
   m_EditorClassIdentifier: 
   className: Elf
+  playerTag: Player4
   playerMat: {fileID: 2100000, guid: d35045c204760b047bc1238f8bb1f967, type: 2}
-  playerProjectile: {fileID: 5188135419035452970, guid: 134bc2b5401f59649b895aab77cb54c8, type: 3}
+  playerProjectile: {fileID: 5188135419035452970, guid: 21e95ab7f94a11e43b0e81782d0664be, type: 3}
   movementSpeed: 3
   shotSpeed: 3
   armor: 1

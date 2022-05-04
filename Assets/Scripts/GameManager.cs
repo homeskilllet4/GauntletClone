@@ -9,6 +9,8 @@ public class GameManager : Singleton<GameManager>
     //private variable used to spawn player once scene is loaded for first time
     private int startPlayer;
 
+
+
     [SerializeField]
     public List<PlayerClass> players;
     public List<int> playerScores;

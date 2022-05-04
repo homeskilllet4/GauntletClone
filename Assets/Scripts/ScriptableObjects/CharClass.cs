@@ -4,6 +4,7 @@ using UnityEngine;
 public class CharClass : ScriptableObject
 {
     public string className;
+    public string playerTag;
     public Material playerMat;
     public GameObject playerProjectile;
    
