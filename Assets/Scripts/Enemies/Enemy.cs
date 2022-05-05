@@ -22,10 +22,10 @@ public class Enemy : MonoBehaviour
     private float _moveSpeed = .05f; //base speed
     public int speed = 1; //speed multiplier
 
-    public bool _isOnBlockade = false; //is blockade between the player and enemy
-    public bool _isTouchingBlockade; //is it touching blockade?
+    protected bool _isOnBlockade = false; //is blockade between the player and enemy
+    protected bool _isTouchingBlockade; //is it touching blockade?
     private bool _isPlayerInCollider; //is the player in the collider?
-    public bool _isTouchingAPlayer = false; //is this enemy touching the player
+    private bool _isTouchingAPlayer = false; //is this enemy touching the player
     //public bool _isMoving; //is this enemy moving
     private RaycastHit hit;
     public bool _isSeeingBlockade;
