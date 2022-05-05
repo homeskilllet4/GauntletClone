@@ -22,9 +22,10 @@ public class Enemy : MonoBehaviour
     private float _moveSpeed = .05f; //base speed
     public int speed = 1; //speed multiplier
 
-    public bool _isOnBlockade = false; //is blockade between the player and enemy
-    public bool _isTouchingBlockade; //is it touching blockade?
+    protected bool _isOnBlockade = false; //is blockade between the player and enemy
+    protected bool _isTouchingBlockade; //is it touching blockade?
     private bool _isPlayerInCollider; //is the player in the collider?
+    protected bool _isTouchingAPlayer; //is this enemy touching the player
     //public bool _isMoving; //is this enemy moving
     private RaycastHit hit;
     public bool _isSeeingBlockade;
@@ -154,7 +155,7 @@ public class Enemy : MonoBehaviour
         }
 
         //if the enemy is not on a blockade, move towards the player
-        if (_isSeeingBlockade != true || _isOnBlockade != true)
+        if (_isTouchingAPlayer != true && _isSeeingBlockade != true || _isOnBlockade != true )
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * _moveSpeed);
             Debug.Log("Moving To Player");
@@ -198,6 +199,18 @@ public class Enemy : MonoBehaviour
             _isTouchingBlockade = true;
             _isOnBlockade = true;
             Debug.Log("Touching blockade");
+        }
+        if (collision.gameObject.CompareTag("Player1") || collision.gameObject.CompareTag("Player2") || collision.gameObject.CompareTag("Player3") || collision.gameObject.CompareTag("Player4"))
+        {
+            _isTouchingAPlayer = true;
+        }
+    }
+
+    protected virtual void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player1") || collision.gameObject.CompareTag("Player2") || collision.gameObject.CompareTag("Player3") || collision.gameObject.CompareTag("Player4"))
+        {
+            _isTouchingAPlayer = false;
         }
     }
 }

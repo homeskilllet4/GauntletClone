@@ -1850,22 +1850,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 475094004875961306, guid: 4a443a453f3ebfa4fb5f154b50408b55, type: 3}
-      propertyPath: m_Size.x
-      value: 0.71361005
-      objectReference: {fileID: 0}
-    - target: {fileID: 475094004875961306, guid: 4a443a453f3ebfa4fb5f154b50408b55, type: 3}
-      propertyPath: m_Size.z
-      value: 0.58561754
-      objectReference: {fileID: 0}
-    - target: {fileID: 475094004875961306, guid: 4a443a453f3ebfa4fb5f154b50408b55, type: 3}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 475094004875961306, guid: 4a443a453f3ebfa4fb5f154b50408b55, type: 3}
-      propertyPath: m_Center.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1729821324964320680, guid: 4a443a453f3ebfa4fb5f154b50408b55, type: 3}
       propertyPath: m_RootOrder
       value: 30
@@ -1913,26 +1897,6 @@ PrefabInstance:
     - target: {fileID: 1729821324964320685, guid: 4a443a453f3ebfa4fb5f154b50408b55, type: 3}
       propertyPath: m_Name
       value: Sorcerer
-      objectReference: {fileID: 0}
-    - target: {fileID: 1729821324964320685, guid: 4a443a453f3ebfa4fb5f154b50408b55, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1729821324964320727, guid: 4a443a453f3ebfa4fb5f154b50408b55, type: 3}
-      propertyPath: m_Size.x
-      value: 0.68643165
-      objectReference: {fileID: 0}
-    - target: {fileID: 1729821324964320727, guid: 4a443a453f3ebfa4fb5f154b50408b55, type: 3}
-      propertyPath: m_Size.z
-      value: 0.5986869
-      objectReference: {fileID: 0}
-    - target: {fileID: 1729821324964320727, guid: 4a443a453f3ebfa4fb5f154b50408b55, type: 3}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1729821324964320727, guid: 4a443a453f3ebfa4fb5f154b50408b55, type: 3}
-      propertyPath: m_Center.z
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a443a453f3ebfa4fb5f154b50408b55, type: 3}
