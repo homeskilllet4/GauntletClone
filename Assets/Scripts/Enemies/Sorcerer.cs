@@ -167,7 +167,8 @@ public class Sorcerer : Enemy
                 }
                 break;
             case "Potion":
-                //gotta track the player
+                //set the player that threw the potion to get the points
+                playerForPoints = other.GetComponent<Potion>().playerThatThrew;
                 hitPoints = 0;
                 GameManager.instance.AddPoints(_potionPoints, playerForPoints);
                 gameObject.SetActive(false);

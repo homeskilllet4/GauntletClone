@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerAttack(InputAction.CallbackContext context)
     {
+        //kade, when implementing the potion attack, set the player gameobject in the potion script to be this gameobject.
+        //that will allow it to track which player will get the points.
         if (context.performed)
         {
             Instantiate(playerProjectile, projectileSpawn.transform.position, transform.rotation);
