@@ -9,7 +9,7 @@ public class Sorcerer : Enemy
     public float invisTime = 3.0f;
     public Material invisMat;
 
-    public float attackCooldown = 2.0f;
+    public float attackCooldown = 1.0f;
     private bool _isTouchingPlayer;
 
 
@@ -84,15 +84,13 @@ public class Sorcerer : Enemy
     }
 
     //if this enemy is touching the player and not invisible, do damage in specific intervals.
-    IEnumerator FightPlayer()
+    IEnumerator FightPlayer(PlayerClass player)
     {
         while (_isTouchingPlayer)
         {
             if (!_isInvisible)
             {
-                //damage player
-
-
+                player.GetComponent<PlayerClass>().health -= _damage;
             }
             yield return new WaitForSeconds(attackCooldown);
         }
@@ -104,19 +102,19 @@ public class Sorcerer : Enemy
         {
             case "Player1":
                 _isTouchingPlayer = true;
-                StartCoroutine(FightPlayer());
+                StartCoroutine(FightPlayer(other.GetComponent<PlayerClass>()));
                 break;
             case "Player2":
                 _isTouchingPlayer = true;
-                StartCoroutine(FightPlayer());
+                StartCoroutine(FightPlayer(other.GetComponent<PlayerClass>()));
                 break;
             case "Player3":
                 _isTouchingPlayer = true;
-                StartCoroutine(FightPlayer());
+                StartCoroutine(FightPlayer(other.GetComponent<PlayerClass>()));
                 break;
             case "Player4":
                 _isTouchingPlayer = true;
-                StartCoroutine(FightPlayer());
+                StartCoroutine(FightPlayer(other.GetComponent<PlayerClass>()));
                 break;
             //player 1 gives shoot points
             case "Player1Projectile":
@@ -194,7 +192,7 @@ public class Sorcerer : Enemy
         if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player4"))
         {
             _isTouchingPlayer = false;
-            StopCoroutine(FightPlayer());
+            StopCoroutine(FightPlayer(other.GetComponent<PlayerClass>()));
         }
     }
 

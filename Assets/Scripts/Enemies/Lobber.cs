@@ -69,6 +69,8 @@ public class Lobber : Enemy
             {
                 lobberProjectile.transform.position = spawnPosition;
                 lobberProjectile.transform.rotation = spawnRotation;
+                //set the damage of the projectile
+                lobberProjectile.GetComponent<LobberBullet>().damage = _damage;
                 lobberProjectile.SetActive(true);
                 _canShoot = false;
                 Debug.Log("Spawned Projectile");
@@ -87,39 +89,73 @@ public class Lobber : Enemy
     {
         switch (other.tag)
         {
+            //player 1 gives shoot points
             case "Player1Projectile":
                 playerForPoints = 1;
-                hitPoints--;
+                if (isShootDamagable)
+                    hitPoints--;
+                CheckLives();
                 if (hitPoints <= 0)
                 {
-                    //UIManager.instance.AddPoints(_shootingPoints, playerForPoints);
+                    GameManager.instance.AddPoints(_shootingPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;
+            //player 2 gives shoot points
             case "Player2Projectile":
                 playerForPoints = 2;
-                hitPoints--;
+                if (isShootDamagable)
+                    hitPoints--;
+                CheckLives();
                 if (hitPoints <= 0)
                 {
-                    //UIManager.instance.AddPoints(_shootingPoints, playerForPoints);
+                    GameManager.instance.AddPoints(_shootingPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;
-            case "Player4Projectile":
-                playerForPoints = 4;
-                hitPoints--;
+            //player 3 does magic damage
+            case "Player3Projectile":
+                playerForPoints = 3;
+                if (isMagicDamagable)
+                    hitPoints--;
+                CheckLives();
                 if (hitPoints <= 0)
                 {
-                    //UIManager.instance.AddPoints(_shootingPoints, playerForPoints);
+                    GameManager.instance.AddPoints(_magicPoints, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
+            //player 4 does shoot damage
+            case "Player4Projectile":
+                playerForPoints = 4;
+                if (isShootDamagable)
+                    hitPoints--;
+                CheckLives();
+                if (hitPoints <= 0)
+                {
+                    GameManager.instance.AddPoints(_shootingPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;
             case "Potion":
+                //set the player that threw the potion to get the points
+                playerForPoints = other.GetComponent<Potion>().playerThatThrew;
                 hitPoints = 0;
-                //add _potionPoints to player
+                GameManager.instance.AddPoints(_potionPoints, playerForPoints);
                 gameObject.SetActive(false);
                 break;
-                //need to set up fight damage
+            //player 1 fight damage
+            case "FightWeapon":
+                playerForPoints = 1;
+                if (isFightDamagable)
+                    hitPoints--;
+                CheckLives();
+                if (hitPoints <= 0)
+                {
+                    GameManager.instance.AddPoints(_fightPoints, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
         }
     }
 }

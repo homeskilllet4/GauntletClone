@@ -46,56 +46,91 @@ public class Ghost : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-
-        //if trigger is player, deal damage to them and then disable this enemy GO
-        if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player4"))
-        {
-            //deal damage to the player
-            gameObject.SetActive(false);
-        }
-
-        
-
         switch (other.tag)
         {
             case "Player1":
-                playerForPoints = 1;
-                //add points to player
+                //deal damage to player
+                other.GetComponent<PlayerClass>().health -= _damage;
                 break;
             case "Player2":
-                playerForPoints = 2;
-                //add points to player
+                //deal damage to player
+                other.GetComponent<PlayerClass>().health -= _damage;
                 break;
             case "Player3":
-                playerForPoints = 3;
-                //add points to player
+                //deal damage to player
+                other.GetComponent<PlayerClass>().health -= _damage;
                 break;
             case "Player4":
-                playerForPoints = 4;
-                //add points to player
+                //deal damage to player
+                other.GetComponent<PlayerClass>().health -= _damage;
                 break;
-            case "PlayerProjectile":
-                hitPoints--;
+            //player 1 gives shoot points
+            case "Player1Projectile":
+                playerForPoints = 1;
+                if (isShootDamagable)
+                    hitPoints--;
+                CheckLives();
                 if (hitPoints <= 0)
                 {
-                    //add _shootPoints to the player
+                    GameManager.instance.AddPoints(_shootingPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;
-            case "MagicProjectile":
-                hitPoints--;
+            //player 2 gives shoot points
+            case "Player2Projectile":
+                playerForPoints = 2;
+                if (isShootDamagable)
+                    hitPoints--;
+                CheckLives();
                 if (hitPoints <= 0)
                 {
-                    //add _magicPoints to the player
+                    GameManager.instance.AddPoints(_shootingPoints, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
+            //player 3 does magic damage
+            case "Player3Projectile":
+                playerForPoints = 3;
+                if (isMagicDamagable)
+                    hitPoints--;
+                CheckLives();
+                if (hitPoints <= 0)
+                {
+                    GameManager.instance.AddPoints(_magicPoints, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
+            //player 4 does shoot damage
+            case "Player4Projectile":
+                playerForPoints = 4;
+                if (isShootDamagable)
+                    hitPoints--;
+                CheckLives();
+                if (hitPoints <= 0)
+                {
+                    GameManager.instance.AddPoints(_shootingPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;
             case "Potion":
+                //set the player that threw the potion to get the points
+                playerForPoints = other.GetComponent<Potion>().playerThatThrew;
                 hitPoints = 0;
-                //add _potionPoints to player
+                GameManager.instance.AddPoints(_potionPoints, playerForPoints);
                 gameObject.SetActive(false);
                 break;
-
+            //player 1 fight damage
+            case "FightWeapon":
+                playerForPoints = 1;
+                if (isFightDamagable)
+                    hitPoints--;
+                CheckLives();
+                if (hitPoints <= 0)
+                {
+                    GameManager.instance.AddPoints(_fightPoints, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
         }
     }
 }

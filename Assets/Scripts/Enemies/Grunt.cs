@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Grunt : Enemy
 {
+    private bool _isTouchingPlayer;
+    public float attackCooldown = 1.0f;
+
     private void OnEnable()
     {
         //set point values
@@ -44,61 +47,112 @@ public class Grunt : Enemy
         CheckLives();
     }
 
+    IEnumerator FightPlayer(PlayerClass player)
+    {
+        while (_isTouchingPlayer)
+        {
+            player.GetComponent<PlayerClass>().health -= _damage;
+            yield return new WaitForSeconds(attackCooldown);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        //if trigger is player, deal damage to them
-        if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player4"))
-        {
-            //deal damage to the player
-        }
-
-        //if trigger is player projectile, take a life from this enemy and change color by new health value.
-        if (other.CompareTag("PlayerProjectile"))
-        {
-            hitPoints--;
-            CheckLives();
-        }
-
         switch (other.tag)
         {
             case "Player1":
-                playerForPoints = 1;
-                //add points to player
+                _isTouchingPlayer = true;
+                StartCoroutine(FightPlayer(other.GetComponent<PlayerClass>()));
                 break;
             case "Player2":
-                playerForPoints = 2;
-                //add points to player
+                _isTouchingPlayer = true;
+                StartCoroutine(FightPlayer(other.GetComponent<PlayerClass>()));
                 break;
             case "Player3":
-                playerForPoints = 3;
-                //add points to player
+                _isTouchingPlayer = true;
+                StartCoroutine(FightPlayer(other.GetComponent<PlayerClass>()));
                 break;
             case "Player4":
-                playerForPoints = 4;
-                //add points to player
+                _isTouchingPlayer = true;
+                StartCoroutine(FightPlayer(other.GetComponent<PlayerClass>()));
                 break;
-            case "PlayerProjectile":
-                hitPoints--;
+            //player 1 gives shoot points
+            case "Player1Projectile":
+                playerForPoints = 1;
+                if (isShootDamagable)
+                    hitPoints--;
+                CheckLives();
                 if (hitPoints <= 0)
                 {
-                    //add _shootPoints to the player
+                    GameManager.instance.AddPoints(_shootingPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;
-            case "MagicProjectile":
-                hitPoints--;
+            //player 2 gives shoot points
+            case "Player2Projectile":
+                playerForPoints = 2;
+                if (isShootDamagable)
+                    hitPoints--;
+                CheckLives();
                 if (hitPoints <= 0)
                 {
-                    //add _magicPoints to the player
+                    GameManager.instance.AddPoints(_shootingPoints, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
+            //player 3 does magic damage
+            case "Player3Projectile":
+                playerForPoints = 3;
+                if (isMagicDamagable)
+                    hitPoints--;
+                CheckLives();
+                if (hitPoints <= 0)
+                {
+                    GameManager.instance.AddPoints(_magicPoints, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
+            //player 4 does shoot damage
+            case "Player4Projectile":
+                playerForPoints = 4;
+                if (isShootDamagable)
+                    hitPoints--;
+                CheckLives();
+                if (hitPoints <= 0)
+                {
+                    GameManager.instance.AddPoints(_shootingPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;
             case "Potion":
+                //set the player that threw the potion to get the points
+                playerForPoints = other.GetComponent<Potion>().playerThatThrew;
                 hitPoints = 0;
-                //add _potionPoints to player
+                GameManager.instance.AddPoints(_potionPoints, playerForPoints);
                 gameObject.SetActive(false);
                 break;
-            //need to set up fight damage
+            //player 1 fight damage
+            case "FightWeapon":
+                playerForPoints = 1;
+                if (isFightDamagable)
+                    hitPoints--;
+                CheckLives();
+                if (hitPoints <= 0)
+                {
+                    GameManager.instance.AddPoints(_fightPoints, playerForPoints);
+                    gameObject.SetActive(false);
+                }
+                break;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        //if the player leaves the trigger zone, stop the coroutine for fighting player
+        if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player4"))
+        {
+            _isTouchingPlayer = false;
+            StopCoroutine(FightPlayer(other.GetComponent<PlayerClass>()));
         }
     }
 }

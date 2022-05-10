@@ -9,7 +9,7 @@ public class LobberBullet : MonoBehaviour
     private int closestPlayer = 0; //spot in array of closest player
 
     public float speed = 2.0f; //movement speed
-    private float _damage; //damage dealt to entities hit
+    public int damage; //damage dealt to entities hit
 
     float minDistance; //float for the minimum distance
 
@@ -27,9 +27,6 @@ public class LobberBullet : MonoBehaviour
             Vector3 playerPos = new Vector3(players[closestPlayer].transform.position.x, players[closestPlayer].transform.position.y, players[closestPlayer].transform.position.z);
             transform.LookAt(playerPos);
         }
-
-        //set damage values
-        _damage = 10;
 
         //set min distance high so other distances can be lower than it.
         minDistance = float.MaxValue;
@@ -113,24 +110,28 @@ public class LobberBullet : MonoBehaviour
         {
             case "Player1":
                 //deal damage to the player
+                other.GetComponent<PlayerClass>().health -= damage;
                 gameObject.SetActive(false);
                 break;
             case "Player2":
                 //deal damage to the player
+                other.GetComponent<PlayerClass>().health -= damage;
                 gameObject.SetActive(false);
                 break;
             case "Player3":
                 //deal damage to the player
+                other.GetComponent<PlayerClass>().health -= damage;
                 gameObject.SetActive(false);
                 break;
             case "Player4":
                 //deal damage to the player
+                other.GetComponent<PlayerClass>().health -= damage;
                 gameObject.SetActive(false);
                 break;
         }
 
-                //if this bullet hits blockade or generator set GO to disabled
-                if (other.CompareTag("Blockade") || other.CompareTag("Generator"))
+        //if this bullet hits blockade or generator set GO to disabled
+        if (other.CompareTag("Blockade") || other.CompareTag("Generator"))
         {
             gameObject.SetActive(false);
         }
