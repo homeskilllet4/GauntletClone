@@ -13,7 +13,7 @@ public class Death : Enemy
     private void OnEnable()
     {
         //set point values
-        _magicPoints = 10;
+        _magicPoints = 500;
         _shootingPoints = 1;
         _fightPoints = 0;
         _generatorPoints = 0;
@@ -58,7 +58,7 @@ public class Death : Enemy
             gameObject.SetActive(false);
     }
 
-    IEnumerator DrainHealth()
+    IEnumerator DrainHealth(PlayerClass player)
     {
         while (_healthDrained <= _drainLimit)
         {
@@ -74,34 +74,15 @@ public class Death : Enemy
         //if the player enters the trigger range, start draining it's health
         if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player4"))
             if (_healthDrained <= _drainLimit)
-                StartCoroutine(DrainHealth());
+                StartCoroutine(DrainHealth(other.GetComponent<PlayerClass>()));
+
         switch (other.tag)
         {
-            case "Player1":
-                playerForPoints = 1;
-                //add points to player
-                break;
-            case "Player2":
-                playerForPoints = 2;
-                //add points to player
-                break;
-            case "Player3":
-                playerForPoints = 3;
-                //add points to player
-                break;
-            case "Player4":
-                playerForPoints = 4;
-                //add points to player
-                break;
-            case "PlayerProjectile":
-                //add _shootPoints to the player
-                gameObject.SetActive(false);
-                break;
             case "MagicProjectile":
                 hitPoints = hitPoints - _magicDamageTaken;
                 if (hitPoints <= 0)
                 {
-                    //add _magicPoints to the player
+                    GameManager.instance.AddPoints(_magicPoints, playerForPoints);
                     gameObject.SetActive(false);
                 }
                 break;
@@ -117,6 +98,6 @@ public class Death : Enemy
     {
         //if the player exits the trigger range, then stop the health drain
         if (other.CompareTag("Player1") || other.CompareTag("Player2") || other.CompareTag("Player3") || other.CompareTag("Player4"))
-            StopCoroutine(DrainHealth());
+            StopCoroutine(DrainHealth(other.GetComponent<PlayerClass>()));
     }
 }
