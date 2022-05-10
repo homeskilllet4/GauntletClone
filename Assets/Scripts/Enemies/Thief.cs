@@ -108,12 +108,12 @@ public class Thief : Enemy
     //steal the players item
     public void StealItem()
     {
-        //steal the player's item
         _itemIsStolen = true;
         StopCoroutine(TrackPoints());
         StartCoroutine(ReversePoints());
     }
 
+    //track the path until it steal an item
     private IEnumerator TrackPoints()
     {
         while (!_itemIsStolen)
@@ -124,6 +124,7 @@ public class Thief : Enemy
         }
     }
 
+    //go back to where it spawned in the same path
     private IEnumerator ReversePoints()
     {
         if (_itemIsStolen)
@@ -151,6 +152,7 @@ public class Thief : Enemy
         switch (other.tag)
         {
             case "Player1":
+                //other.GetComponent<PlayerSomething>().StealItem();
                 playerForPoints = 1;
                 //add points to player
                 StealItem();
