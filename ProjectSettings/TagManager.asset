@@ -29,6 +29,7 @@ TagManager:
   - Player4Projectile
   - FightWeapon
   - Potion
+  - Spawn
   layers:
   - Default
   - TransparentFX
