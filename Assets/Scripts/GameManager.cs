@@ -65,7 +65,9 @@ public class GameManager : Singleton<GameManager>
 
     public void AddPoints(int pointsToAdd, int playerNum)
     {
-        playerScores[playerNum] += pointsToAdd;
+        Debug.Log(playerNum);
+       
+        //playerScores[playerNum - 1] += pointsToAdd;
     }
 
     public void AddPlayer(PlayerClass player)

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+ 
 public class Enemy : MonoBehaviour
 {
     public int rank;
@@ -39,11 +41,13 @@ public class Enemy : MonoBehaviour
 
     protected string _tag;
 
+
+
     protected virtual void FixedUpdate()
     {
         //check where the player is and follow them
         CheckPlayerPos();
-        Debug.Log("Checking Player Pos");
+        //Debug.Log("Checking Player Pos");
 
         //set the minimum distance to the highest value to be able to have values smaller than it.
         float minDistance = float.MaxValue;
@@ -67,10 +71,12 @@ public class Enemy : MonoBehaviour
 
                     //set closest player to the player's spot in the array
                     closestPlayer = i;
-                    Debug.Log(closestPlayer);
+                    //Debug.Log(closestPlayer);
                 }
             }
         }
+
+
 
         if(players.Length > 0)
         {
@@ -82,6 +88,9 @@ public class Enemy : MonoBehaviour
             FollowPlayer(players[closestPlayer]);
         }
     }
+
+
+
 
     //find the player position
     protected void CheckPlayerPos()
@@ -122,6 +131,8 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
+
     protected void FollowPlayer(GameObject player)
     {
         //move towards the player
@@ -129,7 +140,7 @@ public class Enemy : MonoBehaviour
         if (Physics.Linecast(transform.position, player.transform.position, out hit))
         {
             Debug.DrawLine(transform.position, player.transform.position);
-            Debug.Log("Hit Tag: " + hit.transform.tag);
+            //Debug.Log("Hit Tag: " + hit.transform.tag);
 
             //if that object is a wall/blockade
             if (hit.transform.tag == "Blockade")
@@ -142,7 +153,7 @@ public class Enemy : MonoBehaviour
                 {
                     //set bool to true that blockade is in the way so that the enemy won't move through the blockade.
                     _isOnBlockade = true;
-                    Debug.Log("Blockade in the way");
+                    //Debug.Log("Blockade in the way");
                 }
             }
             else
@@ -150,7 +161,7 @@ public class Enemy : MonoBehaviour
                 //if blockade is not in the way, then set both blockade bools to false
                 _isOnBlockade = false;
                 _isTouchingBlockade = false;
-                Debug.Log("blockade not found");
+                //Debug.Log("blockade not found");
             }
         }
 
@@ -161,10 +172,12 @@ public class Enemy : MonoBehaviour
             if (_isTouchingAPlayer != true)
             {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * _moveSpeed);
-            Debug.Log("Moving To Player");
+            //Debug.Log("Moving To Player");
             }
         }
     }
+
+
 
     public void CheckLives()
     {
@@ -188,6 +201,9 @@ public class Enemy : MonoBehaviour
                 break;
         }
     }
+
+
+
 
     //public way to disable this game object
     public void Disable()
