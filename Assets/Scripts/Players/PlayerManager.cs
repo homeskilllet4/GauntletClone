@@ -31,6 +31,7 @@ public class PlayerManager : Singleton<PlayerManager>
     }
 
 
+
     public void RefreshControllers()
     {
         controllerCount = 0;
@@ -41,7 +42,7 @@ public class PlayerManager : Singleton<PlayerManager>
         }
     }
 
-
+  
    
     public void OnPlayerJoined(int index)
     {

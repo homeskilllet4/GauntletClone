@@ -12,10 +12,10 @@ public class GameManager : Singleton<GameManager>
 
 
     [SerializeField]
-    public List<PlayerClass> players;
-    public List<int> playerScores;
-    public List<int> playerKeys;
-    public List<int> playerPotions;
+    public PlayerClass[] players;
+    public int[] playerScores;
+    public int[] playerKeys;
+    public int[] playerPotions;
 
     //Publicly assigned text objects for each individual player class.
     [Tooltip("Player UI elements")]
@@ -32,11 +32,11 @@ public class GameManager : Singleton<GameManager>
     //initialize lists and start UI update cycle
     private void Start()
     {
-        players = new List<PlayerClass>();
-        playerScores = new List<int>(4);
-        playerKeys = new List<int>(4);
-        playerPotions = new List<int>(4);
-        StartCoroutine(UIRefresh());
+        players = new PlayerClass[4];
+        playerScores = new int[4];
+        playerKeys = new int[4];
+        playerPotions = new int[4];
+        
     }
 
     public void UpdateUI()
@@ -49,15 +49,21 @@ public class GameManager : Singleton<GameManager>
             {
                 case "Warrior":
                     WarriorHealth.text = player.health.ToString();
+                    WarriorScore.text = playerScores[0].ToString();
+                    Debug.Log("Health");
                     break;
                 case "Valkyrie":
                     ValkyrieHealth.text = player.health.ToString();
+                    WarriorScore.text = playerScores[0].ToString();
+
                     break;
                 case "Wizard":
                     WizardHealth.text = player.health.ToString();
+                    WarriorScore.text = playerScores[0].ToString();
                     break;
                 case "Elf":
                     ElfHealth.text = player.health.ToString();
+                    WarriorScore.text = playerScores[0].ToString();
                     break;
             }
         }
@@ -65,14 +71,32 @@ public class GameManager : Singleton<GameManager>
 
     public void AddPoints(int pointsToAdd, int playerNum)
     {
-        Debug.Log(playerNum);
+        //Debug.Log(playerNum);
        
-        //playerScores[playerNum - 1] += pointsToAdd;
+        playerScores[playerNum - 1] += pointsToAdd;
+        //Debug.Log(playerScores[playerNum - 1]);
     }
 
     public void AddPlayer(PlayerClass player)
     {
-        players.Add(player);
+        switch (player.charClass.className)
+        {
+            case "Warrior":
+                players[0] = player;
+                break;
+            case "Valkyrie":
+                players[1] = player;
+                break;
+            case "Wizard":
+                players[2] = player;
+                break;
+            case "Elf":
+                players[3] = player;
+                break;
+            default:
+                Debug.Log("GameManager:AddPlayer - Adding Player error");
+                break;
+        }
     }
 
 
@@ -83,6 +107,10 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(PlayerStart(playerID));
     }
 
+    public void StartUI()
+    {
+        StartCoroutine(UIRefresh());
+    }
 
     IEnumerator PlayerStart(int playerID)
     {
@@ -91,9 +119,10 @@ public class GameManager : Singleton<GameManager>
         StopCoroutine("PlayerStart");
     }
 
-    IEnumerator UIRefresh()
+    public IEnumerator UIRefresh()
     {
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.5f);
+        Debug.Log("HERE");
         UpdateUI();
     }
 }

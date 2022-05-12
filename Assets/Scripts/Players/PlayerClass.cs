@@ -23,7 +23,9 @@ public class PlayerClass : MonoBehaviour
     {
         //InitializePlayer();
         GameManager.instance.AddPlayer(this);
+        GameManager.instance.StartUI();
     }
+
 
 
     public void SetPlayerNum(int num)

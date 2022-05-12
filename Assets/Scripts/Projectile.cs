@@ -11,4 +11,11 @@ public class Projectile : MonoBehaviour
         //move forward
         transform.position += transform.forward * speed * Time.deltaTime;
     }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        this.gameObject.SetActive(false);
+        
+    }
+
 }

@@ -95,7 +95,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.67085147
-  m_Center: {x: 0, y: 0.046038438, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &5439139558093487159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,4 +117,5 @@ MonoBehaviour:
   life3: {fileID: 2100000, guid: bd683f91ccd2878489a967fb597bc5f4, type: 2}
   spawnCD: 2
   enemyType: 
+  spawnLimit: 0
   redMat: {fileID: 2100000, guid: fe81b776fa7a0b249a539a87c6db2e2d, type: 2}
