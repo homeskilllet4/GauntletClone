@@ -217,6 +217,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1565179891}
     - target: {fileID: 530164327481440175, guid: 119a46f13f992574ebaafa247a99ea1b, type: 3}
+      propertyPath: playerMenu
+      value: 
+      objectReference: {fileID: 1565179899}
+    - target: {fileID: 530164327481440175, guid: 119a46f13f992574ebaafa247a99ea1b, type: 3}
       propertyPath: WizardScore
       value: 
       objectReference: {fileID: 1565179894}
@@ -241,8 +245,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1565179895}
     - target: {fileID: 7858372396165122719, guid: 119a46f13f992574ebaafa247a99ea1b, type: 3}
+      propertyPath: m_Pitch
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858372396165122719, guid: 119a46f13f992574ebaafa247a99ea1b, type: 3}
       propertyPath: m_Volume
-      value: 0.35
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858372396165122719, guid: 119a46f13f992574ebaafa247a99ea1b, type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
+      value: 1.007
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 119a46f13f992574ebaafa247a99ea1b, type: 3}
@@ -821,6 +833,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1565179899 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5703328641457872935, guid: fb8785d542b14db41ad239eff60a5d92, type: 3}
+  m_PrefabInstance: {fileID: 1565179890}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1840066590
 GameObject:
   m_ObjectHideFlags: 0

@@ -74,7 +74,7 @@ public class Generator : MonoBehaviour
             GameObject enemy = ObjectPooler.Instance.GetPooledObject(enemyType);
 
             //if enemy exists, pull it to spawn location, set their rank, then activate them.
-            if (enemy != null && ObjectPooler.Instance.pooledObjects.Count < 25);
+            if (enemy != null);
             {
                 enemy.transform.position = _spawnLoc;
                 enemy.GetComponent<Enemy>().rank = rank;

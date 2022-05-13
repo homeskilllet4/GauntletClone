@@ -53,6 +53,11 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    public void MenuToAdd(InputAction.CallbackContext context)
+    {
+        GameManager.instance.PopMenu();
+    }
+
     public void PlayerAttack(InputAction.CallbackContext context)
     {
         //kade, when implementing the potion attack, set the player gameobject in the potion script to be this gameobject.

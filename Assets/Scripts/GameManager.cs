@@ -14,6 +14,10 @@ public class GameManager : Singleton<GameManager>
     private bool isElf;
 
 
+
+    public GameObject playerMenu;
+
+
     [SerializeField]
     public PlayerClass[] players;
     public int[] playerScores;
@@ -160,5 +164,11 @@ public class GameManager : Singleton<GameManager>
             yield return new WaitForSeconds(.5f);
             UpdateUI();
         }
+    }
+
+
+    public void PopMenu()
+    {
+        playerMenu.SetActive(true);
     }
 }

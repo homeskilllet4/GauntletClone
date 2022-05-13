@@ -73,7 +73,6 @@ public class Lobber : Enemy
                 lobberProjectile.GetComponent<LobberBullet>().damage = _damage;
                 lobberProjectile.SetActive(true);
                 _canShoot = false;
-                Debug.Log("Spawned Projectile");
             }
         }
 
