@@ -16,6 +16,6 @@ MonoBehaviour:
   playerTag: Player3
   playerMat: {fileID: 2100000, guid: d06339899661c024b8edba7207d0f238, type: 2}
   playerProjectile: {fileID: 5188135419035452970, guid: 6584a8681d5ce684fa0ef570501cd0df, type: 3}
-  movementSpeed: 1
+  movementSpeed: 2
   shotSpeed: 3
   armor: 0

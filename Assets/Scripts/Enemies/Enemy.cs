@@ -42,6 +42,7 @@ public class Enemy : MonoBehaviour
     protected string _tag;
 
 
+    Vector3 target;
 
     protected virtual void FixedUpdate()
     {
@@ -80,12 +81,16 @@ public class Enemy : MonoBehaviour
 
         if(players.Length > 0)
         {
-            //set closest player's position and look in their direction
-            Vector3 playerPos = new Vector3(players[closestPlayer].transform.position.x, players[closestPlayer].transform.position.y, players[closestPlayer].transform.position.z);
-            transform.LookAt(playerPos);
+            //set closest player's position and look in their
+            if(players[closestPlayer] != null)
+            {
+                Vector3 playerPos = new Vector3(players[closestPlayer].transform.position.x, players[closestPlayer].transform.position.y, players[closestPlayer].transform.position.z);
+                transform.LookAt(playerPos);
 
-            //follow the closest player
-            FollowPlayer(players[closestPlayer]);
+                //follow the closest player
+                FollowPlayer(players[closestPlayer]);
+            }
+            
         }
     }
 
@@ -102,30 +107,25 @@ public class Enemy : MonoBehaviour
         {
             //player is in collider
             _isPlayerInCollider = true;
-            
+
             //for each player in collider sphere, set the player's spot in array
             foreach (Collider hitCollider in hitColliders)
             {
-                switch (hitCollider.tag)
+                if (hitCollider.tag == "Player1")
                 {
-                    case "Player1":
-                        if (players[0] == null)
-                            players[0] = hitCollider.gameObject;
-                        break;
-                    case "Player2":
-                        if (players[1] == null)
-                            players[1] = hitCollider.gameObject;
-                        break;
-                    case "Player3":
-                        if (players[2] == null)
-                            players[2] = hitCollider.gameObject;
-                        break;
-                    case "Player4":
-                        if (players[3] == null)
-                            players[3] = hitCollider.gameObject;
-                        break;
-                    default:
-                        break;
+                    players[0] = hitCollider.gameObject;
+                }
+                else if (hitCollider.tag == "Player2")
+                {
+                    players[1] = hitCollider.gameObject;
+                }
+                else if (hitCollider.tag == "Player1")
+                {
+                    players[2] = hitCollider.gameObject;
+                }
+                else if (hitCollider.tag == "Player4")
+                {
+                    players[3] = hitCollider.gameObject;
                 }
             }
         }
@@ -139,7 +139,7 @@ public class Enemy : MonoBehaviour
         //if object is between the player and this enemy
         if (Physics.Linecast(transform.position, player.transform.position, out hit))
         {
-            Debug.DrawLine(transform.position, player.transform.position);
+            //Debug.DrawLine(transform.position, player.transform.position);
             //Debug.Log("Hit Tag: " + hit.transform.tag);
 
             //if that object is a wall/blockade
@@ -171,7 +171,8 @@ public class Enemy : MonoBehaviour
         {
             if (_isTouchingAPlayer != true)
             {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * _moveSpeed);
+                target = new Vector3(player.transform.position.x, 0f, player.transform.position.z);
+                transform.position = Vector3.MoveTowards(transform.position, target, speed * _moveSpeed);
             //Debug.Log("Moving To Player");
             }
         }

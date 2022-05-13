@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 07b2aedf0183b0148a7fd687f944706b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Chambers_Kade.unity
     guid: 4de86d7c871eac848baef3b219632581
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/level00.unity
     guid: 57adad1234ce11a4ea2817fdbca71a48
   m_configObjects:

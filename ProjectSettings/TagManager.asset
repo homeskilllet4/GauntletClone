@@ -30,6 +30,7 @@ TagManager:
   - FightWeapon
   - Potion
   - Spawn
+  - Food
   layers:
   - Default
   - TransparentFX

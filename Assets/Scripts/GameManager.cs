@@ -8,7 +8,10 @@ public class GameManager : Singleton<GameManager>
 {
     //private variable used to spawn player once scene is loaded for first time
     private int startPlayer;
-
+    private bool isWarrior;
+    private bool isValkyrie;
+    private bool isWizard;
+    private bool isElf;
 
 
     [SerializeField]
@@ -36,46 +39,62 @@ public class GameManager : Singleton<GameManager>
         playerScores = new int[4];
         playerKeys = new int[4];
         playerPotions = new int[4];
-        
+        StartCoroutine(UIRefresh());
     }
 
     public void UpdateUI()
     {
-        foreach(PlayerClass player in players)
+        if (isWarrior)
         {
-            string name = player.charClass.className;
-            Debug.Log("Updating UI");
-            switch (name)
-            {
-                case "Warrior":
-                    WarriorHealth.text = player.health.ToString();
-                    WarriorScore.text = playerScores[0].ToString();
-                    Debug.Log("Health");
-                    break;
-                case "Valkyrie":
-                    ValkyrieHealth.text = player.health.ToString();
-                    WarriorScore.text = playerScores[0].ToString();
-
-                    break;
-                case "Wizard":
-                    WizardHealth.text = player.health.ToString();
-                    WarriorScore.text = playerScores[0].ToString();
-                    break;
-                case "Elf":
-                    ElfHealth.text = player.health.ToString();
-                    WarriorScore.text = playerScores[0].ToString();
-                    break;
-            }
+            WarriorHealth.text = players[0].health.ToString();
+            WarriorScore.text = playerScores[0].ToString();
+        }
+        if (isValkyrie)
+        {
+            ValkyrieHealth.text = players[1].health.ToString();
+            ValkyrieScore.text = playerScores[1].ToString();
+        }
+        if (isWizard)
+        {
+            WizardHealth.text = players[2].health.ToString();
+            WizardScore.text = playerScores[2].ToString();
+        }
+        if (isElf)
+        {
+            ElfHealth.text = players[3].health.ToString();
+            ElfScore.text = playerScores[3].ToString();
         }
     }
 
     public void AddPoints(int pointsToAdd, int playerNum)
     {
-        //Debug.Log(playerNum);
-       
         playerScores[playerNum - 1] += pointsToAdd;
-        //Debug.Log(playerScores[playerNum - 1]);
     }
+
+    public void AddKey(int playerNum)
+    {
+        playerKeys[playerNum - 1] += 1;
+    }
+
+    public void AddPotion(int playerNum)
+    {
+        playerPotions[playerNum - 1] += 1;
+    }
+
+
+    public bool UseKey(int playerNum)
+    {
+        if(playerKeys[playerNum - 1] > 0)
+        {
+            playerKeys[playerNum - 1] -= 1;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
     public void AddPlayer(PlayerClass player)
     {
@@ -83,15 +102,19 @@ public class GameManager : Singleton<GameManager>
         {
             case "Warrior":
                 players[0] = player;
+                isWarrior = true;
                 break;
             case "Valkyrie":
                 players[1] = player;
+                isValkyrie = true;
                 break;
             case "Wizard":
                 players[2] = player;
+                isWizard = true;
                 break;
             case "Elf":
                 players[3] = player;
+                isElf = true;   
                 break;
             default:
                 Debug.Log("GameManager:AddPlayer - Adding Player error");
@@ -100,16 +123,27 @@ public class GameManager : Singleton<GameManager>
     }
 
 
+    public void LosePotion(int player)
+    {
+        if(playerPotions[player - 1] > 0)
+        {
+            playerPotions[player - 1] -= 1;
+        }
+    }
+
+
+
+    public void UsePotion()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, 20);
+    }
+
+
     public void StartGame(int playerID)
     {
         startPlayer = playerID;
         SceneManager.LoadSceneAsync(1);
         StartCoroutine(PlayerStart(playerID));
-    }
-
-    public void StartUI()
-    {
-        StartCoroutine(UIRefresh());
     }
 
     IEnumerator PlayerStart(int playerID)
@@ -121,8 +155,10 @@ public class GameManager : Singleton<GameManager>
 
     public IEnumerator UIRefresh()
     {
-        yield return new WaitForSeconds(.5f);
-        Debug.Log("HERE");
-        UpdateUI();
+        while (true)
+        {
+            yield return new WaitForSeconds(.5f);
+            UpdateUI();
+        }
     }
 }

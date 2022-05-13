@@ -9,7 +9,7 @@ public class CharClass : ScriptableObject
     public GameObject playerProjectile;
    
     [Range(1,3), Tooltip("Player speed: 1=slow, 2=moderate, 3=fast")]
-    public int movementSpeed;
+    public float movementSpeed;
 
     [Range(1, 3), Tooltip("Shot speed: 1=slow, 2=moderate, 3=fast")]
     public int shotSpeed;

@@ -152,19 +152,19 @@ public class Thief : Enemy
         switch (other.tag)
         {
             case "Player1":
-                //other.GetComponent<PlayerSomething>().StealItem(); KADE IMPLEMENT
+                GameManager.instance.LosePotion(1); 
                 StealItem();
                 break;
             case "Player2":
-                //other.GetComponent<PlayerSomething>().StealItem(); KADE IMPLEMENT
+                GameManager.instance.LosePotion(2);
                 StealItem();
                 break;
             case "Player3":
-                //other.GetComponent<PlayerSomething>().StealItem(); KADE IMPLEMENT
+                GameManager.instance.LosePotion(3);
                 StealItem();
                 break;
             case "Player4":
-                //other.GetComponent<PlayerSomething>().StealItem(); KADE IMPLEMENT
+                GameManager.instance.LosePotion(4);
                 StealItem();
                 break;
             //player 1 gives shoot points

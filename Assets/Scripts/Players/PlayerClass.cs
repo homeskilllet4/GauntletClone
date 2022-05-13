@@ -23,9 +23,29 @@ public class PlayerClass : MonoBehaviour
     {
         //InitializePlayer();
         GameManager.instance.AddPlayer(this);
-        GameManager.instance.StartUI();
+        StartCoroutine(ConstantDamage());
     }
 
+
+    public IEnumerator ConstantDamage()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            health -= 3;
+        }
+    }
+
+
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Food")
+        {
+            health += 50;
+            Destroy(other.gameObject);
+        }
+    }
 
 
     public void SetPlayerNum(int num)
@@ -33,16 +53,31 @@ public class PlayerClass : MonoBehaviour
         playerNum = num;
     }
 
-    public void InitializePlayer(CharClass charClass)
+    public void InitializePlayer(CharClass characterClass)
     {
-        this.charClass = charClass;
-        this.className = charClass.className;
-        this.tag = charClass.playerTag;
-        movementSpeed = charClass.movementSpeed;
-        _characterMat = charClass.playerMat;
+        charClass = characterClass;
+        className = characterClass.className;
+        tag = characterClass.playerTag;
+        movementSpeed = characterClass.movementSpeed;
+        _characterMat = characterClass.playerMat;
         health = 600;
         keyCount = 0;
         potionCount = 0;
         GetComponent<Renderer>().material = _characterMat;
+        switch (this.tag)
+        {
+            case "Player1":
+                GetComponent<PlayerController>().playerProjectile = GetComponent<PlayerController>().Projectiles[0];
+                break;
+            case "Player2":
+                GetComponent<PlayerController>().playerProjectile = GetComponent<PlayerController>().Projectiles[1];
+                break;
+            case "Player3":
+                GetComponent<PlayerController>().playerProjectile = GetComponent<PlayerController>().Projectiles[2];
+                break;
+            case "Player4":
+                GetComponent<PlayerController>().playerProjectile = GetComponent<PlayerController>().Projectiles[3];
+                break;
+        }
     }
 }

@@ -21,6 +21,10 @@ public class Generator : MonoBehaviour
     private Material _ogMat; //original material
     public Material redMat; //mat to change color to when hit
 
+
+
+
+
     private void Start()
     {
         //set the hit points to the rank set in inspector, set the spawn location of enemies
@@ -58,7 +62,7 @@ public class Generator : MonoBehaviour
     //grab enemies from object pool
     private IEnumerator Spawn()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
 
         //infinite loop
         while (_enemiesSpawned < spawnLimit)
@@ -70,13 +74,12 @@ public class Generator : MonoBehaviour
             GameObject enemy = ObjectPooler.Instance.GetPooledObject(enemyType);
 
             //if enemy exists, pull it to spawn location, set their rank, then activate them.
-            if (enemy != null)
+            if (enemy != null && ObjectPooler.Instance.pooledObjects.Count < 25);
             {
                 enemy.transform.position = _spawnLoc;
                 enemy.GetComponent<Enemy>().rank = rank;
                 enemy.SetActive(true);
                 _enemiesSpawned++;
-                Debug.Log("Spawned " + enemyType);
             }
         }
     }

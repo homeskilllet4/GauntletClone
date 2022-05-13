@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private PlayerInput playerInput;
 
+
+    public List<GameObject> Projectiles;
+
     public GameObject playerProjectile;
     public GameObject projectileSpawn;
 
@@ -61,13 +64,8 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
     void Update()
     {
-        if (playerVelocity.y < 0)
-        {
-            playerVelocity.y = 0f;
-        }
 
         Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
         controller.Move(move * Time.deltaTime * playerSpeed);

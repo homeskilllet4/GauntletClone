@@ -117,5 +117,5 @@ MonoBehaviour:
   life3: {fileID: 2100000, guid: bd683f91ccd2878489a967fb597bc5f4, type: 2}
   spawnCD: 2
   enemyType: 
-  spawnLimit: 10
+  spawnLimit: 4
   redMat: {fileID: 2100000, guid: fe81b776fa7a0b249a539a87c6db2e2d, type: 2}

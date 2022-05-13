@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 834744038190512472}
   - component: {fileID: 8281852481000498262}
   - component: {fileID: 368253934967301677}
+  - component: {fileID: 8140227988644415135}
   m_Layer: 0
   m_Name: key
   m_TagString: Key
@@ -94,7 +95,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.185047, y: 0.48942995, z: 0.032077063}
+  m_Size: {x: 0.3, y: 0.5, z: 0.1}
   m_Center: {x: -0.018425751, y: 0.24471498, z: 0}
 --- !u!114 &368253934967301677
 MonoBehaviour:
@@ -109,3 +110,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateAngle: 5
+--- !u!114 &8140227988644415135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368253934967301676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2624a0b61635164b807618e77cf8377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
